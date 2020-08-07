@@ -1,0 +1,16 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~vuetify/dist/vuetify.css';
+@import '~@mdi/font/css/materialdesignicons.css';
+
+@import 'file-upload';
+
+a:hover,
+a:-webkit-any-link {
+    text-decoration: none;
+}
