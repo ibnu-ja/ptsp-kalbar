@@ -1,4 +1,6 @@
-const mix = require('laravel-mix');
+const mix = require('laravel-mix')
+require('vuetifyjs-mix-extension')
+require('laravel-mix-alias')
 
 /*
  |--------------------------------------------------------------------------
@@ -11,5 +13,16 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix
+    .alias({
+        '@': '/resources/js',
+        '~': '/resources/sass',
+        '@components': '/resources/js/components',
+    })
+    // https://ptsp-kalbar.test:3000
+    .browserSync({
+        proxy: 'ptsp-kalbar.test'
+    })
+    .js('resources/js/app.js', 'public/js')
+    .vuetify('vuetify-loader')
+    .sass('resources/sass/app.scss', 'public/css')

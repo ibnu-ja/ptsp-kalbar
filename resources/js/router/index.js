@@ -1,72 +1,76 @@
-
+// Imports
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
-
 import { store } from '../store'
-import Home from '../pages/Dashboard/Home'
-import Register from '../pages/Register'
-import Login from '../pages/Login'
-import Dashboard from '../pages/Dashboard'
-import DashboardHome from '../pages/Dashboard/Home'
+import Router from 'vue-router'
 
-// Routes
-const routes = [
-    {
-        path: '/',
-        name: 'Home',
-        component: Home,
-        meta: {
-            layout: 'web',
-            auth: undefined
-        }
-    },
-    {
-        path: '/register',
-        name: 'register',
-        component: Register,
-        meta: {
-            layout: 'auth',
-            auth: false
-        }
-    },
-    {
-        path: '/login',
-        name: 'login',
-        component: Login,
-        meta: {
-            layout: 'auth',
-            auth: false
-        }
-    },
-    {
-        path: '/dashboard',
-        component: Dashboard,
-        meta: { breadCrumb: 'Dashboard' },
-        children: [
-            {
-                path: '/',
-                redirect: 'beranda'
-            },
-            {
-                path: 'beranda',
-                name: 'dashboard.home',
-                component: DashboardHome,
-                meta: {
-                    auth: true,
-                    layout: 'admin',
-                    breadCrumb: 'Beranda'
-                }
-            },            
-        ]
-    },
-]
+Vue.use(Router)
 
-const router = new VueRouter({
-    history: true,
+const router = new Router({
     mode: 'history',
-    routes,
+    base: process.env.BASE_URL,
+    scrollBehavior: (to, from, savedPosition) => {
+        if (to.hash) return { selector: to.hash }
+        if (savedPosition) return savedPosition
+
+        return { x: 0, y: 0 }
+    },
+    routes: [
+        {
+            path: '/',
+            component: () => import('@/layouts/home/Index.vue'),
+            children: [
+                {
+                    path: '',
+                    name: 'Home',
+                    component: () => import('@/pages/Web/home/Index.vue'),
+                    meta: {
+                        layout: 'web',
+                        auth: undefined
+                    }
+                },
+                {
+                    path: 'perizinan',
+                    name: 'Perizinan',
+                    component: () => import('@/pages/Web/perizinan/Index.vue'),
+                    meta: {
+                        src: require('@/assets/about.jpg'),
+                        layout: 'web',
+                        auth: undefined
+                    },
+                },
+                {
+                    path: 'contact-us',
+                    name: 'Contact',
+                    component: () => import('@/pages/Web/contact-us/Index.vue'),
+                    meta: {
+                        src: require('@/assets/contact.jpg'),
+                        layout: 'web',
+                        auth: undefined
+                    },
+                },
+                {
+                    path: 'pro',
+                    name: 'Pro',
+                    component: () => import('@/pages/Web/pro/Index.vue'),
+                    meta: {
+                        src: require('@/assets/pro.jpg'),
+                        layout: 'web',
+                        auth: undefined
+                    },
+                },
+                {
+                    path: '*',
+                    name: 'FourOhFour',
+                    component: () => import('@/pages/Web/404/Index.vue'),
+                    meta: {
+                        layout: 'web',
+                        auth: undefined
+                    }
+                },
+            ],
+        },
+
+    ],
 })
 
 router.beforeEach((to, from, next) => {
