@@ -5,8 +5,7 @@
       space="36"
     >
       <v-row
-        align="center"
-        class="ma-0"
+        class="ma-0 px-10"
         justify="center"
       >
         <v-col
@@ -17,77 +16,31 @@
             class="mx-auto"
             width="600"
           >
+            <v-card-title>
+              <span class="title text--h5">Kategori Layanan</span>
+            </v-card-title>
             <v-list>
+              <!-- <v-subheader>Layanan</v-subheader> -->
               <v-list-group
                 v-for="(item, i) in items"
                 :key="i"
+                :value="i == 0 ? true: false"
               >
                 <template v-slot:activator>
                   <v-list-item-content>
-                    <v-list-item-title>{{item.nama}}</v-list-item-title>
+                    <v-list-item-title>{{item}}</v-list-item-title>
                   </v-list-item-content>
                 </template>
-                <v-list-group
-                  no-action
-                  sub-group
-                  v-for="(itemm, j) in item.subkategori"
-                  :key="j"
-                >
-                  <template v-slot:activator>
-                    <v-list-item-content>
-                      <v-list-item-title>{{itemm.nama}}</v-list-item-title>
-                    </v-list-item-content>
-                  </template>
-                  <v-list-item
-                    v-for="(itemmm, k) in itemm.subkategori"
-                    :key="k"
-                    link
-                  >
-                    <v-list-item-title v-text="itemmm.nama"></v-list-item-title>
-                  </v-list-item>
-                </v-list-group>
-                <!-- <v-list-item
-                  v-for="(itemm, j) in item.subkategori"
-                  :key="j"
-                  link
-                >
-                  <v-list-item-title v-text="itemm.nama"></v-list-item-title>
-                </v-list-item> -->
-              </v-list-group>
-              <!-- <v-list-item v-for="(item, i) in items" :key="i">
-                <v-list-item-title>{{item.nama}}</v-list-item-title>
-              </v-list-item> -->
-              <!-- <v-list-item v-for="(itemm,j) in item.subkategori" :key="j">
-                <v-list-item-title>{{itemm.nama}}</v-list-item-title>
-              </v-list-item> -->
-              <!-- <v-list-item>
-                <v-list-item-icon>
-                  <v-icon>mdi-home</v-icon>
-                </v-list-item-icon>
-
-                <v-list-item-title>Pelayanan</v-list-item-title>
-              </v-list-item>
-              <v-list-group
-                no-action
-                sub-group
-              >
-                <template v-slot:activator>
-                  <v-list-item-content>
-                    <v-list-item-title>Admin</v-list-item-title>
-                  </v-list-item-content>
-                </template>
-
                 <v-list-item
-                  v-for="(item, i) in items"
-                  :key="i"
-                  link
+                  v-for="(itemm, j) in subkategori"
+                  :key="j"
+                  @click="tampilLayanan(item, j)"
                 >
-                  <v-list-item-title v-text="item.text"></v-list-item-title>
-                  <v-list-item-icon>
-                    <v-icon v-text="item.icon"></v-icon>
-                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>{{itemm}}</v-list-item-title>
+                  </v-list-item-content>
                 </v-list-item>
-              </v-list-group> -->
+              </v-list-group>
             </v-list>
           </v-card>
         </v-col>
@@ -95,34 +48,37 @@
           cols=12
           md=8
         >
-
-        </v-col>
-        <!-- <base-title
-          space="0"
-          title="GET OUR NEWSLETTER"
-        />
-
-        <v-responsive
-          class="px-4 mx-6"
-          max-width="600"
-          width="100%"
-        >
-          <base-text-field
-            hide-details
-            label="Your Email Address"
+          <v-expansion-panels
+            v-model="panel"
+            :disabled="loading"
+            v-if="!loading"
           >
-            <template v-slot:append-outer>
-              <v-btn
-                class="ml-n1"
-                height="40"
-                outlined
-                style="margin-top: -7px;"
-              >
-                Subscribe
-              </v-btn>
-            </template>
-          </base-text-field>
-        </v-responsive> -->
+            <v-expansion-panel
+              v-for="(layanan, k) in layanans"
+              :key="k"
+            >
+              <v-expansion-panel-header class="text-h6">{{layanan.name}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                Deskripsi: {{layanan.deskripsi}}<br />
+                1. Mendaftarkan diri menjadi peserta Tender dilaman LPSE.Kemenag.go.id<br />
+                2. Mendownload dokumen pemilihan<br />
+                3. Mengikuti tahapan pemberian penjelasan<br />
+                4. Mengupload dukumen penawaran<br />
+                5. Menghadiri pembuktian klarifikasi<br />
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
+          <div
+            v-else
+            class="text-center"
+          >
+            <v-progress-circular
+              :size="70"
+              :width="7"
+              indeterminate
+            ></v-progress-circular>
+          </div>
+        </v-col>
       </v-row>
     </base-section>
   </v-theme-provider>
@@ -132,77 +88,45 @@
 export default {
   name: 'JenisPelayanan',
   data: () => ({
-    items: [
-      {
-        nama: "Pelayanan Bidang Tata Kelola",
-        subkategori: [
-          {
-            nama: "Pelayana Barang Publik",
-            subkategori: [
-              {
-                nama: "Pengadaan Barang dan Jasa melalui UKPBJ",
-                link: "/asd"
-              },
-              {
-                nama: "Pengadaan Barang dan Jasa melalui UKPBJ",
-                link: "/asd"
-              }
-            ]
-          },
-          {
-            nama: "Pelayana Barang Publik",
-            subkategori: [
-              {
-                nama: "Pengadaan Barang dan Jasa melalui UKPBJ",
-                link: "/asd"
-              },
-              {
-                nama: "Pengadaan Barang dan Jasa melalui UKPBJ",
-                link: "/asd"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        nama: "Pelayanan Bidang Tata Kelola",
-        subkategori: [
-          {
-            nama: "Pelayana Barang Publik",
-            subkategori: [
-              {
-                nama: "Pengadaan Barang dan Jasa melalui UKPBJ",
-                link: "/asd"
-              },
-              {
-                nama: "Pengadaan Barang dan Jasa melalui UKPBJ",
-                link: "/asd"
-              }
-            ]
-          },
-          {
-            nama: "Pelayana Barang Publik",
-            subkategori: [
-              {
-                nama: "Pengadaan Barang dan Jasa melalui UKPBJ",
-                link: "/asd"
-              },
-              {
-                nama: "Pengadaan Barang dan Jasa melalui UKPBJ",
-                link: "/asd"
-              }
-            ]
-          }
-        ]
-      }
-    ],
-
-    // cruds: {
-    //   {text:'Create', icon:'mdi-add'},
-    //   {text:'Read',  icon:'mdi-insert_drive_file'},
-    //   {text:'Update',  icon:'mdi-update'},
-    //   {text:'Delete',  icon:'mdi-delete'}
-    // }
+    items: [],
+    subkategori: ['Layanan Barang Publik', 'Layanan Jasa Publik', 'Layanan Administrasi'],
+    layanans: '',
+    loading: true,
+    panel: 0,
+    readonly: false,
   }),
+  mounted: function () {
+    var that = this
+    axios
+      .get('/api/kategori')
+      .then(function (response) {
+        that.items = response.data.kategori
+        that.tampilLayanan(response.data.kategori[0], 0)
+      })
+      // .then(function (response) {
+      //   console.log(response.data)
+      //   this.items = response.data.kategori
+      //   // this.tampilLayanan (response.data.kategori[0], 1)
+      // })
+      .catch(error => console.log(error))
+    // 
+  },
+  methods: {
+    tampilLayanan (layanan, subkategori) {
+      var that = this
+      that.loading = true
+      axios
+        .get(
+          '/api/layanan?kategori=' + layanan + '&subkategori=' + (subkategori + 1)
+        )
+        .then(function (response) {
+          that.layanans = response.data.data
+          that.loading = false
+        })
+        .catch(
+          error => console.log(error)
+        )
+    }
+  }
 }
 </script>
