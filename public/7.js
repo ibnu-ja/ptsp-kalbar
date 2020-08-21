@@ -40,10 +40,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Web/home/Index.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Web/home/Index.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Web/perizinan/Index.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Web/perizinan/Index.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -51,29 +51,26 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Web_View__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/pages/Web/View */ "./resources/js/pages/Web/View.vue");
 /* harmony import */ var _mixins_load_sections__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/mixins/load-sections */ "./resources/js/mixins/load-sections.js");
-//
 // Extensions
  // Mixins
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Home',
+  name: 'Perizinan',
   metaInfo: {
-    title: 'Home'
+    title: 'Layanan Perizinan'
   },
   "extends": _pages_Web_View__WEBPACK_IMPORTED_MODULE_0__["default"],
-  mixins: [Object(_mixins_load_sections__WEBPACK_IMPORTED_MODULE_1__["default"])(['carousel', // 'theme-features',
-  // 'features',
-  'proses-pelayanan', 'contact-us', 'affiliates', 'social-media' // 'keep-in-touch',
+  mixins: [Object(_mixins_load_sections__WEBPACK_IMPORTED_MODULE_1__["default"])(['hero-alt', 'jenis-pelayanan' // 'theme-features',
+  // 'affiliates',
   // 'newsletter',
   // 'pro-features',
   // 'info',
-  // 'scrolling',
   ])],
   props: {
     id: {
       type: String,
-      "default": 'home'
+      "default": 'about'
     }
   }
 });
@@ -246,16 +243,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/Web/home/Index.vue":
-/*!***********************************************!*\
-  !*** ./resources/js/pages/Web/home/Index.vue ***!
-  \***********************************************/
+/***/ "./resources/js/pages/Web/perizinan/Index.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/pages/Web/perizinan/Index.vue ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/pages/Web/home/Index.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/pages/Web/perizinan/Index.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 var render, staticRenderFns
 
@@ -277,21 +274,21 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/pages/Web/home/Index.vue"
+component.options.__file = "resources/js/pages/Web/perizinan/Index.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/pages/Web/home/Index.vue?vue&type=script&lang=js&":
-/*!************************************************************************!*\
-  !*** ./resources/js/pages/Web/home/Index.vue?vue&type=script&lang=js& ***!
-  \************************************************************************/
+/***/ "./resources/js/pages/Web/perizinan/Index.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/pages/Web/perizinan/Index.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Web/home/Index.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Web/perizinan/Index.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
@@ -319,7 +316,7 @@ var map = {
 	],
 	"./Carousel.vue": [
 		"./resources/js/pages/Web/sections/Carousel.vue",
-		10,
+		9,
 		26
 	],
 	"./ContactUs.vue": [
@@ -344,19 +341,19 @@ var map = {
 	],
 	"./JenisPelayanan.vue": [
 		"./resources/js/pages/Web/sections/JenisPelayanan.vue",
-		36
+		29
 	],
 	"./KeepInTouch.vue": [
 		"./resources/js/pages/Web/sections/KeepInTouch.vue",
-		29
+		30
 	],
 	"./Map.vue": [
 		"./resources/js/pages/Web/sections/Map.vue",
-		30
+		31
 	],
 	"./Newsletter.vue": [
 		"./resources/js/pages/Web/sections/Newsletter.vue",
-		31
+		32
 	],
 	"./ProFeatures.vue": [
 		"./resources/js/pages/Web/sections/ProFeatures.vue",
@@ -366,7 +363,7 @@ var map = {
 	],
 	"./ProsesPelayanan.vue": [
 		"./resources/js/pages/Web/sections/ProsesPelayanan.vue",
-		35
+		33
 	],
 	"./Scrolling.vue": [
 		"./resources/js/pages/Web/sections/Scrolling.vue",
@@ -374,11 +371,11 @@ var map = {
 	],
 	"./SocialMedia.vue": [
 		"./resources/js/pages/Web/sections/SocialMedia.vue",
-		32
+		34
 	],
 	"./ThemeFeatures.vue": [
 		"./resources/js/pages/Web/sections/ThemeFeatures.vue",
-		33
+		35
 	]
 };
 function webpackAsyncContext(req) {

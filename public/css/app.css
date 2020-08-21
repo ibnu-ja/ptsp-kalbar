@@ -22487,7 +22487,7 @@ var map = {
 	],
 	"./Carousel.vue": [
 		"./resources/js/pages/Web/sections/Carousel.vue",
-		10,
+		9,
 		26
 	],
 	"./ContactUs.vue": [
@@ -22512,19 +22512,19 @@ var map = {
 	],
 	"./JenisPelayanan.vue": [
 		"./resources/js/pages/Web/sections/JenisPelayanan.vue",
-		36
+		29
 	],
 	"./KeepInTouch.vue": [
 		"./resources/js/pages/Web/sections/KeepInTouch.vue",
-		29
+		30
 	],
 	"./Map.vue": [
 		"./resources/js/pages/Web/sections/Map.vue",
-		30
+		31
 	],
 	"./Newsletter.vue": [
 		"./resources/js/pages/Web/sections/Newsletter.vue",
-		31
+		32
 	],
 	"./ProFeatures.vue": [
 		"./resources/js/pages/Web/sections/ProFeatures.vue",
@@ -22534,7 +22534,7 @@ var map = {
 	],
 	"./ProsesPelayanan.vue": [
 		"./resources/js/pages/Web/sections/ProsesPelayanan.vue",
-		35
+		33
 	],
 	"./Scrolling.vue": [
 		"./resources/js/pages/Web/sections/Scrolling.vue",
@@ -22542,11 +22542,11 @@ var map = {
 	],
 	"./SocialMedia.vue": [
 		"./resources/js/pages/Web/sections/SocialMedia.vue",
-		32
+		34
 	],
 	"./ThemeFeatures.vue": [
 		"./resources/js/pages/Web/sections/ThemeFeatures.vue",
-		33
+		35
 	]
 };
 function webpackAsyncContext(req) {

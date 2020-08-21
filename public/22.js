@@ -78,23 +78,19 @@ var render = function() {
       _c(
         "v-list",
         { attrs: { color: "white" } },
-        _vm._l(_vm.items, function(name) {
+        _vm._l(_vm.items, function(name, i) {
           return _c(
             "v-list-item",
             {
-              key: name,
-              attrs: {
-                to: { name: name },
-                exact: name === "Home",
-                color: "primary"
-              }
+              key: i,
+              attrs: { to: name.link, exact: name === "Home", color: "primary" }
             },
             [
               _c(
                 "v-list-item-content",
                 [
                   _c("v-list-item-title", {
-                    domProps: { textContent: _vm._s(name) }
+                    domProps: { textContent: _vm._s(name.title) }
                   })
                 ],
                 1

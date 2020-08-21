@@ -27,7 +27,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'HomeLayout',
   components: {
     HomeAppBar: function HomeAppBar() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! @/layouts/home/AppBar */ "./resources/js/layouts/home/AppBar.vue"));
+      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! @/layouts/home/AppBar */ "./resources/js/layouts/home/AppBar.vue"));
     },
     HomeFooter: function HomeFooter() {
       return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! @/layouts/home/Footer */ "./resources/js/layouts/home/Footer.vue"));

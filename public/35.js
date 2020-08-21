@@ -1,14 +1,18 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[35],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Web/sections/ProsesPelayanan.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Web/sections/ProsesPelayanan.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Web/sections/ThemeFeatures.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Web/sections/ThemeFeatures.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -33,42 +37,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ProsesPelayanan',
+  name: 'SectionThemeFeatures',
   data: function data() {
     return {
-      cards: [{
-        title: 'Permohonan Pelayanan',
-        text: 'Pemohon menyiapkan berkas dan persyaratan.',
-        callout: '1'
+      features: [{
+        title: 'Pixel Perfect Design',
+        icon: 'mdi-fountain-pen-tip'
       }, {
-        title: 'Pemeriksaan Berkas',
-        text: 'Operator mem-verifikasi kelengkapan persyaratan yang diajukan pemohon.',
-        callout: '2'
+        title: 'Retina Ready',
+        icon: 'mdi-cellphone'
       }, {
-        title: 'Proses Penyelesaian',
-        text: 'Petugas teknis akan menindaklanjuti penyelesaian.',
-        callout: '3'
+        color: 'primary',
+        dark: true,
+        title: 'Easily Customizable',
+        icon: 'mdi-pencil-box-outline'
       }, {
-        title: 'Menerima Tanda Terima',
-        text: 'Pemohon datang untuk menerima hasil pelayanan.',
-        callout: '4'
-      } // {
-      //   title: 'Target Setting',
-      //   subtitle: 'Income Flow',
-      //   text: 'Similique sunt in culpa qui officia deserunt mollitia animi, id est laborut dolorum fuga.harum quidem rerum facilis estexpedita distinctio.',
-      //   callout: '04',
-      // },
-      ]
+        title: 'Image Parallax',
+        icon: 'mdi-image-size-select-actual'
+      }, {
+        title: 'Seo Optimized',
+        icon: 'mdi-ice-pop'
+      }, {
+        title: '24/7 Support',
+        icon: 'mdi-help-circle-outline'
+      }]
     };
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Web/sections/ProsesPelayanan.vue?vue&type=template&id=122429d8&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Web/sections/ProsesPelayanan.vue?vue&type=template&id=122429d8& ***!
-  \**************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Web/sections/ThemeFeatures.vue?vue&type=template&id=6e873849&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Web/sections/ThemeFeatures.vue?vue&type=template&id=6e873849& ***!
+  \************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -82,29 +84,37 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "base-section",
-    { attrs: { id: "proses-pelayanan" } },
+    { attrs: { id: "theme-features" } },
     [
-      _c("base-section-heading", {
-        attrs: {
-          color: "grey lighten-2",
-          icon: "mdi-walk",
-          title: "Proses Pelayanan"
-        }
-      }),
+      _c("base-section-heading", { attrs: { title: "Theme Features" } }, [
+        _vm._v(
+          "\n    Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, in! Asperiores, impedit libero. Veniam rerum saepe unde nihil possimus quibusdam esse accusamus mollitia magni fuga.\n  "
+        )
+      ]),
       _vm._v(" "),
       _c(
         "v-container",
         [
           _c(
             "v-row",
-            _vm._l(_vm.cards, function(card) {
+            _vm._l(_vm.features, function(feature, i) {
               return _c(
                 "v-col",
-                { key: card.title, attrs: { cols: "12", md: "3" } },
+                { key: i, attrs: { cols: "12", md: "6" } },
                 [
                   _c(
-                    "base-info-card",
-                    _vm._b({}, "base-info-card", card, false)
+                    "base-avatar-card",
+                    _vm._b(
+                      { attrs: { align: "left", horizontal: "" } },
+                      "base-avatar-card",
+                      feature,
+                      false
+                    ),
+                    [
+                      _vm._v(
+                        "\n          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis illum veniam cum dolores ratione commodi beatae quas maxime, laboriosam excepturi solut!\n        "
+                      )
+                    ]
                   )
                 ],
                 1
@@ -126,17 +136,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/pages/Web/sections/ProsesPelayanan.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/pages/Web/sections/ProsesPelayanan.vue ***!
-  \*************************************************************/
+/***/ "./resources/js/pages/Web/sections/ThemeFeatures.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/pages/Web/sections/ThemeFeatures.vue ***!
+  \***********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ProsesPelayanan_vue_vue_type_template_id_122429d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProsesPelayanan.vue?vue&type=template&id=122429d8& */ "./resources/js/pages/Web/sections/ProsesPelayanan.vue?vue&type=template&id=122429d8&");
-/* harmony import */ var _ProsesPelayanan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProsesPelayanan.vue?vue&type=script&lang=js& */ "./resources/js/pages/Web/sections/ProsesPelayanan.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ThemeFeatures_vue_vue_type_template_id_6e873849___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ThemeFeatures.vue?vue&type=template&id=6e873849& */ "./resources/js/pages/Web/sections/ThemeFeatures.vue?vue&type=template&id=6e873849&");
+/* harmony import */ var _ThemeFeatures_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ThemeFeatures.vue?vue&type=script&lang=js& */ "./resources/js/pages/Web/sections/ThemeFeatures.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
@@ -149,9 +159,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ProsesPelayanan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ProsesPelayanan_vue_vue_type_template_id_122429d8___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ProsesPelayanan_vue_vue_type_template_id_122429d8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ThemeFeatures_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ThemeFeatures_vue_vue_type_template_id_6e873849___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ThemeFeatures_vue_vue_type_template_id_6e873849___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -169,38 +179,38 @@ _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/pages/Web/sections/ProsesPelayanan.vue"
+component.options.__file = "resources/js/pages/Web/sections/ThemeFeatures.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/pages/Web/sections/ProsesPelayanan.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/pages/Web/sections/ProsesPelayanan.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/pages/Web/sections/ThemeFeatures.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/pages/Web/sections/ThemeFeatures.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProsesPelayanan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ProsesPelayanan.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Web/sections/ProsesPelayanan.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProsesPelayanan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ThemeFeatures_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ThemeFeatures.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Web/sections/ThemeFeatures.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ThemeFeatures_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/pages/Web/sections/ProsesPelayanan.vue?vue&type=template&id=122429d8&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/pages/Web/sections/ProsesPelayanan.vue?vue&type=template&id=122429d8& ***!
-  \********************************************************************************************/
+/***/ "./resources/js/pages/Web/sections/ThemeFeatures.vue?vue&type=template&id=6e873849&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/pages/Web/sections/ThemeFeatures.vue?vue&type=template&id=6e873849& ***!
+  \******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProsesPelayanan_vue_vue_type_template_id_122429d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ProsesPelayanan.vue?vue&type=template&id=122429d8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Web/sections/ProsesPelayanan.vue?vue&type=template&id=122429d8&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProsesPelayanan_vue_vue_type_template_id_122429d8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ThemeFeatures_vue_vue_type_template_id_6e873849___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ThemeFeatures.vue?vue&type=template&id=6e873849& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Web/sections/ThemeFeatures.vue?vue&type=template&id=6e873849&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ThemeFeatures_vue_vue_type_template_id_6e873849___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProsesPelayanan_vue_vue_type_template_id_122429d8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ThemeFeatures_vue_vue_type_template_id_6e873849___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
