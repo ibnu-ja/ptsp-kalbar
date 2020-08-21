@@ -9,14 +9,14 @@
       color="white"
     >
       <v-list-item
-        v-for="name in items"
-        :key="name"
-        :to="{ name }"
+        v-for="(name, i) in items"
+        :key="i"
+        :to="name.link"
         :exact="name === 'Home'"
         color="primary"
       >
         <v-list-item-content>
-          <v-list-item-title v-text="name" />
+          <v-list-item-title v-text="name.title" />
         </v-list-item-content>
       </v-list-item>
     </v-list>
