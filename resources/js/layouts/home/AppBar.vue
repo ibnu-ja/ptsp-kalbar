@@ -8,22 +8,17 @@
       height="80"
     >
       <base-img
-        :src="require('@/assets/logo.svg')"
+        :src="require('@/assets/kemenag-logo.png')"
         class="mr-3 hidden-xs-only"
         contain
         max-width="52"
         width="100%"
       />
 
-      <base-img
-        :src="require('@/assets/zero-logo-light.svg')"
-        contain
-        max-width="128"
-        width="100%"
-      />
+      <v-toolbar-title class="text-h4">PTSP-Kalbar</v-toolbar-title>
 
       <v-spacer />
-      <v-toolbar-items>
+      <v-toolbar-items class="hidden-sm-and-down">
         <v-btn text v-for="(item, i) in items" :key="i" :to="item.link">
           {{item.title}}
         </v-btn>
@@ -74,7 +69,6 @@ export default {
     items: [
       { title: "Beranda", link: '/', menu: '/' },
       { title: "Perizinan", link: '/perizinan', },
-      { title: "Pemateri", link: '' },
       { title: "Daftar", link: '' },
       { title: "Masuk", link: '' },
       { title: "Hubungi Kami", link: '' },
