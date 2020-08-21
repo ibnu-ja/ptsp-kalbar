@@ -37,3 +37,6 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'admin'], function () {
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('layanan', 'TampilLayananController@index');
+Route::get('kategori', 'TampilLayananController@kategori');
