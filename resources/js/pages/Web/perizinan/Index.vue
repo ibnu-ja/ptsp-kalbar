@@ -15,12 +15,12 @@
     mixins: [
       LoadSections([
         'hero-alt',
-        'proses-pelayanan',
-        'theme-features',
-        'affiliates',
-        'newsletter',
-        'pro-features',
-        'info',
+        'jenis-pelayanan',
+        // 'theme-features',
+        // 'affiliates',
+        // 'newsletter',
+        // 'pro-features',
+        // 'info',
       ]),
     ],
 
