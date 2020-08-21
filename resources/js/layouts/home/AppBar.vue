@@ -5,7 +5,7 @@
       app
       color="white"
       elevation="1"
-      height="80"
+      
     >
       <base-img
         :src="require('@/assets/kemenag-logo.png')"
