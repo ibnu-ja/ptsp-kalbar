@@ -20,7 +20,7 @@ export default {
       // 'features',
       'proses-pelayanan',
       'contact-us',
-      'affiliates',
+      // 'affiliates',
       'social-media',
       // 'keep-in-touch',
       // 'newsletter',
