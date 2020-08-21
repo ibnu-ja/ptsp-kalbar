@@ -2,7 +2,7 @@
   <section>
     <v-carousel
       cycle
-      :height="$vuetify.breakpoint.mdAndUp ? 450 : 225"
+      :height="$vuetify.breakpoint.mdAndUp ? 450 : 300"
       hide-delimiter-background
       show-arrows-on-hover
     >
