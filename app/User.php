@@ -11,6 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable, HasRoles;
+    protected $guard_name = 'api';
     /**
      * The attributes that are mass assignable.
      *
