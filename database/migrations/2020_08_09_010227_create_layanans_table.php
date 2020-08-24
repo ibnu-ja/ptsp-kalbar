@@ -18,8 +18,8 @@ class CreateLayanansTable extends Migration
             $table->string('name');
             $table->string('kategori');
             $table->unsignedInteger('subkategori');
-            $table->string('tingkat_layanan');
-            $table->longText('deskripsi');
+            $table->string('tingkat_layanan')->nullable();
+            $table->longText('deskripsi')->nullable();
             $table->timestamps();
         });
     }
