@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c475572e9add26a14efce79141304b08",
+    "content-hash": "512030e44fb2ac432d770510dfabce89",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2768,16 +2768,16 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "8.3.3",
+            "version": "8.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "70b6d6406532a1ace0663a66235ba38b7ab58691"
+                "reference": "8a51de55977dbc4aa8ce7f901e83aa449846937a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/70b6d6406532a1ace0663a66235ba38b7ab58691",
-                "reference": "70b6d6406532a1ace0663a66235ba38b7ab58691",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/8a51de55977dbc4aa8ce7f901e83aa449846937a",
+                "reference": "8a51de55977dbc4aa8ce7f901e83aa449846937a",
                 "shasum": ""
             },
             "require": {
@@ -2854,7 +2854,68 @@
                 "media",
                 "spatie"
             ],
-            "time": "2020-06-30T07:57:43+00:00"
+            "time": "2020-08-06T09:34:42+00:00"
+        },
+        {
+            "name": "spatie/laravel-model-status",
+            "version": "1.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-model-status.git",
+                "reference": "ddce7aa93ba09fe4c7ec3bdbc6d86d7f037f3299"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-model-status/zipball/ddce7aa93ba09fe4c7ec3bdbc6d86d7f037f3299",
+                "reference": "ddce7aa93ba09fe4c7ec3bdbc6d86d7f037f3299",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.8.0|^6.0|^7.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.8.0|^4.0|^5.0",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\ModelStatus\\ModelStatusServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\ModelStatus\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Verhelst",
+                    "email": "tvke91@gmail.com",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A package to enable assigning statuses to Eloquent Models",
+            "homepage": "https://github.com/spatie/laravel-model-status",
+            "keywords": [
+                "laravel-status",
+                "spatie"
+            ],
+            "time": "2020-03-03T15:20:25+00:00"
         },
         {
             "name": "spatie/laravel-permission",
@@ -6693,6 +6754,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
