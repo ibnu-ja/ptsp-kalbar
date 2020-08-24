@@ -307,33 +307,33 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./404.vue": [
 		"./resources/js/pages/Web/sections/404.vue",
-		16
+		17
 	],
 	"./AboutOurProduct.vue": [
 		"./resources/js/pages/Web/sections/AboutOurProduct.vue",
-		25
+		26
 	],
 	"./Affiliates.vue": [
 		"./resources/js/pages/Web/sections/Affiliates.vue",
-		20,
+		21,
 		3
 	],
 	"./Carousel.vue": [
 		"./resources/js/pages/Web/sections/Carousel.vue",
 		9,
-		26
+		27
 	],
 	"./ContactUs.vue": [
 		"./resources/js/pages/Web/sections/ContactUs.vue",
-		27
+		28
 	],
 	"./Features.vue": [
 		"./resources/js/pages/Web/sections/Features.vue",
-		28
+		29
 	],
 	"./Hero.vue": [
 		"./resources/js/pages/Web/sections/Hero.vue",
-		17
+		18
 	],
 	"./HeroAlt.vue": [
 		"./resources/js/pages/Web/sections/HeroAlt.vue",
@@ -345,41 +345,42 @@ var map = {
 	],
 	"./JenisPelayanan.vue": [
 		"./resources/js/pages/Web/sections/JenisPelayanan.vue",
-		29
+		16,
+		30
 	],
 	"./KeepInTouch.vue": [
 		"./resources/js/pages/Web/sections/KeepInTouch.vue",
-		30
+		31
 	],
 	"./Map.vue": [
 		"./resources/js/pages/Web/sections/Map.vue",
-		31
+		32
 	],
 	"./Newsletter.vue": [
 		"./resources/js/pages/Web/sections/Newsletter.vue",
-		32
+		33
 	],
 	"./ProFeatures.vue": [
 		"./resources/js/pages/Web/sections/ProFeatures.vue",
 		0,
 		1,
-		18
+		19
 	],
 	"./ProsesPelayanan.vue": [
 		"./resources/js/pages/Web/sections/ProsesPelayanan.vue",
-		33
+		34
 	],
 	"./Scrolling.vue": [
 		"./resources/js/pages/Web/sections/Scrolling.vue",
-		19
+		20
 	],
 	"./SocialMedia.vue": [
 		"./resources/js/pages/Web/sections/SocialMedia.vue",
-		34
+		35
 	],
 	"./ThemeFeatures.vue": [
 		"./resources/js/pages/Web/sections/ThemeFeatures.vue",
-		35
+		36
 	]
 };
 function webpackAsyncContext(req) {

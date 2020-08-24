@@ -61,7 +61,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'SectionBusinessInfo',
   components: {
     InfoFeatures: function InfoFeatures() {
-      return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! @/components/InfoFeatures */ "./resources/js/components/InfoFeatures.vue"));
+      return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! @/components/InfoFeatures */ "./resources/js/components/InfoFeatures.vue"));
     },
     Instagram: function Instagram() {
       return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! @/components/Instagram */ "./resources/js/components/Instagram.vue"));

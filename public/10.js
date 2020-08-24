@@ -71,7 +71,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'HomeAppBar',
   components: {
     HomeDrawer: function HomeDrawer() {
-      return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./Drawer */ "./resources/js/layouts/home/Drawer.vue"));
+      return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ./Drawer */ "./resources/js/layouts/home/Drawer.vue"));
     }
   },
   data: function data() {
@@ -185,13 +185,7 @@ var render = function() {
       _c(
         "v-app-bar",
         {
-          attrs: {
-            id: "home-app-bar",
-            app: "",
-            color: "white",
-            elevation: "1",
-            height: "80"
-          }
+          attrs: { id: "home-app-bar", app: "", color: "white", elevation: "1" }
         },
         [
           _c("base-img", {
