@@ -6,8 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permohonan extends Model
 {
-    public function comments()
+
+    protected $fillable = ['user_id', 'keterangan', 'pemohon'];
+
+    public function layanan()
     {
-        return $this->hasMany('App\Layanan');
+        return $this->belongsTo('App\Layanan');
+    }
+    public function archive()
+    {
+        return $this->hasMany('App\Archive');
     }
 }
