@@ -21,9 +21,9 @@ class CreatePermohonansTable extends Migration
             $table->string('tanda_terima')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('pemohon')->nullable();
-            $table->unsignedBigInteger('pelayanans_id')->nullable();
+            $table->unsignedBigInteger('layanan_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('pelayanans_id')->references('id')->on('layanans');
+            $table->foreign('layanan_id')->references('id')->on('layanans');
             $table->timestamps();
         });
     }
