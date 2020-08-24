@@ -15,7 +15,10 @@ class CreateArchivesTable extends Migration
     {
         Schema::create('archives', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_berkas');
+            $table->string('nomor');
+            $table->string('asal');
+            $table->string('perihal');
+            $table->string('tgl_berkas');
             $table->unsignedBigInteger('permohonan_id');
             $table->foreign('permohonan_id')->references('id')->on('permohonans');
             $table->timestamps();
