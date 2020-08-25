@@ -302,7 +302,7 @@ var map = {
 	],
 	"./AboutOurProduct.vue": [
 		"./resources/js/pages/Web/sections/AboutOurProduct.vue",
-		41
+		42
 	],
 	"./Affiliates.vue": [
 		"./resources/js/pages/Web/sections/Affiliates.vue",
@@ -312,15 +312,15 @@ var map = {
 	"./Carousel.vue": [
 		"./resources/js/pages/Web/sections/Carousel.vue",
 		8,
-		42
+		43
 	],
 	"./ContactUs.vue": [
 		"./resources/js/pages/Web/sections/ContactUs.vue",
-		43
+		44
 	],
 	"./Features.vue": [
 		"./resources/js/pages/Web/sections/Features.vue",
-		44
+		45
 	],
 	"./Hero.vue": [
 		"./resources/js/pages/Web/sections/Hero.vue",
@@ -338,31 +338,31 @@ var map = {
 		"./resources/js/pages/Web/sections/JenisPelayanan.vue",
 		0,
 		27,
-		45
+		46
 	],
 	"./KeepInTouch.vue": [
 		"./resources/js/pages/Web/sections/KeepInTouch.vue",
-		46
+		47
 	],
 	"./Map.vue": [
 		"./resources/js/pages/Web/sections/Map.vue",
-		47
+		48
 	],
 	"./Newsletter.vue": [
 		"./resources/js/pages/Web/sections/Newsletter.vue",
-		48
+		49
 	],
 	"./ProFeatures.vue": [
 		"./resources/js/pages/Web/sections/ProFeatures.vue",
 		0,
 		1,
-		6,
-		7,
+		3,
+		4,
 		33
 	],
 	"./ProsesPelayanan.vue": [
 		"./resources/js/pages/Web/sections/ProsesPelayanan.vue",
-		49
+		50
 	],
 	"./Scrolling.vue": [
 		"./resources/js/pages/Web/sections/Scrolling.vue",
@@ -370,11 +370,11 @@ var map = {
 	],
 	"./SocialMedia.vue": [
 		"./resources/js/pages/Web/sections/SocialMedia.vue",
-		50
+		51
 	],
 	"./ThemeFeatures.vue": [
 		"./resources/js/pages/Web/sections/ThemeFeatures.vue",
-		51
+		52
 	]
 };
 function webpackAsyncContext(req) {
