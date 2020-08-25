@@ -26,13 +26,16 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('permission/{permissionName}', function ($permissionName) {
+        if(!auth()->user()->can($permissionName)) {
+            abort(403);
+        }
+        return response()->json(true, 204);
+    });
     // Users
-    // Route::get('users', 'UserController@index')->middleware('isAdmin');
-    // Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
-
     Route::get('testing', function () {
-        
-        auth()->user()->syncRoles(['operator']);
+
+        auth()->user()->syncRoles(['pimpinan']);
         // auth()->user()->syncRoles(['operator', 'admin']);
         // return auth()->user()->can(['add permohonan','view permohonan']);
         // $role = auth()->user()->getRoleNames();
@@ -43,8 +46,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     });
 
     Route::group(['middleware' => ['permission:add permohonan|view permohonan']], function () {
-        Route::get('permohonan', 'PermohonanController@index');
-        Route::post('permohonan/{id}', 'PermohonanController@store');
+        Route::get('layanan/permohonan', 'PermohonanController@index');
+        Route::post('layanan/{id}/permohonan', 'PermohonanController@store');
+        Route::get('layanan/permohonan/{id}', 'PermohonanController@show');
+
+        Route::get('layanan/permohonan/{id}/berkas', 'PermohonanController@medialibrary');
     });
 });
 
