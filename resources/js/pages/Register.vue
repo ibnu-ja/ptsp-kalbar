@@ -3,7 +3,6 @@
     class="fill-height"
     fluid
   >
-    <vue-headful title="Register Page" />
     <v-row
       align="center"
       justify="center"

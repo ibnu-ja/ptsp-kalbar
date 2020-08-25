@@ -4,7 +4,6 @@
     class="fill-height"
     fluid
   >
-    <vue-headful title="Login Page" />
     <v-row
       align="center"
       justify="center"
