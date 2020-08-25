@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="drawer"
+    v-bind="$attrs"
     app
   >
     <v-list dense>
@@ -29,8 +29,8 @@
           v-else-if="item.children"
           :key="item.text"
           v-model="item.model"
-          :prepend-icon="item.model ? item.icon : item['icon-alt']"
-          append-icon=""
+          :prepend-icon="item['icon-prepend']"
+          :append-icon="item.model ? item.icon : item['icon-alt']"
         >
           <template v-slot:activator>
             <v-list-item-content>
@@ -42,7 +42,7 @@
           <v-list-item
             v-for="(child, i) in item.children"
             :key="i"
-            link
+            :to="child.link"
           >
             <v-list-item-action v-if="child.icon">
               <v-icon>{{ child.icon }}</v-icon>
@@ -57,7 +57,7 @@
         <v-list-item
           v-else
           :key="item.text"
-          link
+          :to="item.link"
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -78,40 +78,34 @@ export default {
   name: 'DashDrawer',
   data: () => ({
     dialog: false,
-    drawer: null,
     items: [
-      { icon: 'mdi-home', text: 'PTSP' },
-      { icon: 'mdi-view-dashboard', text: 'Dashboard' },
+      { icon: 'mdi-home', text: 'PTSP', link: '/' },
+      { icon: 'mdi-view-dashboard', text: 'Beranda', link: '/dashboard/beranda' },
       // { icon: 'mdi-handshake', text: 'Layanan' },
       {
-        icon: 'mdi-chevron-up',
+        icon: 'mdi-chevron-down',
         'icon-alt': 'mdi-chevron-down',
-        text: 'Layanan',
+        'icon-prepend': 'mdi-handshake',
+        text: 'Permohonan',
         model: true,
         children: [
-          { icon: 'mdi-handshake', text: 'List' },
-          { icon: 'mdi-hand-pointing-right', text: 'Disposisi' },
-          // { icon: 'mdi-plus', text: 'Create label' },
+          { icon: 'mdi-account-details', text: 'List', link: '/dashboard/permohonan/list' },
+          { icon: 'mdi-account-star', text: 'Disposisi' },
         ],
       },
-      // {
-      //   icon: 'mdi-chevron-up',
-      //   'icon-alt': 'mdi-chevron-down',
-      //   text: 'Layanan',
-      //   model: false,
-      //   children: [
-      //     { text: 'Import' },
-      //     { text: 'Export' },
-      //     { text: 'Print' },
-      //     { text: 'Undo changes' },
-      //     { text: 'Other contacts' },
-      //   ],
-      // },
-      // { icon: 'mdi-cog', text: 'Settings' },
-      // { icon: 'mdi-message', text: 'Send feedback' },
-      // { icon: 'mdi-help-circle', text: 'Help' },
-      // { icon: 'mdi-cellphone-link', text: 'App downloads' },
-      // { icon: 'mdi-keyboard', text: 'Go to the old version' },
+      {
+        icon: 'mdi-chevron-down',
+        'icon-alt': 'mdi-chevron-down',
+        'icon-prepend': 'mdi-handshake',
+        text: 'asdaaa',
+        model: false,
+        children: [
+          { icon: 'mdi-account-details', text: 'asdsa', link: '/asdasdasdasdsadas' },
+          { icon: 'mdi-account-details', text: 'asd', link: '/asdasdasdasdasd' },
+          { icon: 'mdi-account-details', text: 'asdasdasd', link: '/asd' },
+          { icon: 'mdi-account-star', text: 'Disposisi', link: '/asdasdasd' },
+        ],
+      },
     ],
   }),
 }
