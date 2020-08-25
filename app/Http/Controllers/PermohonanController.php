@@ -23,6 +23,13 @@ class PermohonanController extends Controller
     {
         return PermohonanResource::collection(Permohonan::paginate(25));
     }
+    // public function medialibrary($id)
+    // {
+    //     // $mediaItems = $permohonan->getMedia();
+    //     $permohonan = Permohonan::find(1)->first();
+    //     return response()->json(['data' => $permohonan->getMedia()]); //returns empty array;
+
+    // }
     /**
      * Store a newly created resource in storage.
      *
@@ -31,11 +38,15 @@ class PermohonanController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $request->validate([
+        $validation = validator($request->all(), [
             'keterangan' => 'required',
             'pemohon' => 'required',
             'keterangan' => 'required'
         ]);
+
+        if ($validation->fails()) {
+            return response()->json($validation->errors(), 400);
+        }
 
         $permohonan = Layanan::find($id)->permohonan()->create([
             'user_id' => auth()->user()->id,
@@ -44,20 +55,21 @@ class PermohonanController extends Controller
             'pemohon' => $request->pemohon,
         ]);
 
-        foreach ($request->nomor_berkas as $key => $n) {
-            $asal = $request->asal;
-            $perihal = $request->perihal;
-            $tgl_berkas = $request->tgl_berkas;
-            $permohonan
-                ->archive()
-                ->create([
-                    'nomor' => $n,
-                    'asal' => $asal[$key],
-                    'perihal' => $perihal[$key],
-                    'tgl_berkas' => $tgl_berkas[$key],
-                ]);
-        }
-        return new PermohonanResource($permohonan->with('archives'));
+        $permohonan->addMultipleMediaFromRequest(['berkas'])
+            ->each(function ($fileAdder, $key) use ($request) {
+                $fileAdder
+                    ->withCustomProperties([
+                        'surat' => [
+                            'nomor' => $request->nomor_berkas[$key],
+                            'asal' => $request->asal[$key],
+                            'perihal' => $request->perihal[$key],
+                            'tgl_berkas' => $request->tgl_berkas[$key],
+                        ]
+                    ])
+                    ->toMediaCollection();
+            });
+        // return response()->json(['data' => $permohonan]);
+        return new PermohonanResource($permohonan);
     }
     /**
      * Display the specified resource.
@@ -65,8 +77,9 @@ class PermohonanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Permohonan $permohonan)
+    public function show($id)
     {
+        $permohonan = Permohonan::find($id)->first();
         return new PermohonanResource($permohonan);
     }
 

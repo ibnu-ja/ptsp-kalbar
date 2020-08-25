@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Permohonan extends Model
+
+class Permohonan extends Model implements HasMedia
 {
+    use InteractsWithMedia;
 
     protected $fillable = ['user_id', 'keterangan', 'pemohon'];
 
