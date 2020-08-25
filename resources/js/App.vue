@@ -6,7 +6,7 @@
 
 const default_layout = 'web'
 import Web from '@/layouts/home/Index.vue'
-import Admin from './layouts/Admin'
+import Admin from '@/layouts/admin/Index.vue'
 import Auth from './layouts/Auth'
 
 export default {
