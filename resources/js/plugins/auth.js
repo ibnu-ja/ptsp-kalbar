@@ -1,5 +1,3 @@
-import Vue from 'vue'
-import VueAuth from '@websanova/vue-auth'
 import bearer from '@websanova/vue-auth/drivers/auth/bearer'
 import axios from '@websanova/vue-auth/drivers/http/axios.1.x'
 import router from '@websanova/vue-auth/drivers/router/vue-router.2.x'
@@ -19,5 +17,3 @@ const config = {
     refreshData: { url: '/api/auth/refresh', method: 'GET', enabled: true, interval: 30 }
 }
 export default config
-
-Vue.use(VueAuth, config)

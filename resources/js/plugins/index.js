@@ -1,5 +1,4 @@
 import './base'
 import './moment'
 import './axios'
-import './axios'
 import './meta'
