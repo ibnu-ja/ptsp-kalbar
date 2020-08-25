@@ -23,26 +23,6 @@
           {{item.title}}
         </v-btn>
       </v-toolbar-items>
-      <!-- <div>
-        <v-tabs
-          class="hidden-sm-and-down"
-          optional
-        >
-          <v-tab
-            v-for="(item, i) in items"
-            :key="i"
-            :ripple="false"
-            active-class="text--primary"
-            class="font-weight-bold"
-            min-width="96"
-            text
-            @click="linkOrScroll(item)"
-          >
-            {{ item.title }}
-          </v-tab>
-        </v-tabs>
-      </div> -->
-
       <v-app-bar-nav-icon
         class="hidden-md-and-up"
         @click="drawer = !drawer"
@@ -68,10 +48,10 @@ export default {
     drawer: null,
     items: [
       { title: "Beranda", link: '/', menu: '/' },
-      { title: "Perizinan", link: '/perizinan', },
-      { title: "Daftar", link: '' },
-      { title: "Masuk", link: '' },
-      { title: "Hubungi Kami", link: '' },
+      { title: "Layanan", link: '/layanan', },
+      { title: "Daftar", link: '/register' },
+      { title: "Masuk", link: '/login' },
+      { title: "Hubungi Kami", link: '/contact-us' },
     ],
     options: {
       duration: 300,
