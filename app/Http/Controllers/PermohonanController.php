@@ -21,7 +21,7 @@ class PermohonanController extends Controller
      */
     public function index()
     {
-        return PermohonanResource::collection(Permohonan::paginate(25));
+        return PermohonanResource::collection(Permohonan::get());
     }
     // public function medialibrary($id)
     // {
