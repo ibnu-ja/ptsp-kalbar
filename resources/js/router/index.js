@@ -19,126 +19,164 @@ const router = new Router({
         //     path: '/',
         //     component: () => import('@/layouts/home/Index.vue'),
         //     children: [
+        {
+            path: '/',
+            name: 'Home',
+            component: () => import('@/pages/Web/home/Index.vue'),
+            meta: {
+                layout: 'web',
+                auth: undefined
+            }
+        },
+        // {
+        //     path: '/can-tampil',
+        //     name: 'can tampil',
+        //     component: () => import('@/pages/Home/Index.vue'),
+        //     // beforeEnter (to, from, next) {
+        //     //     if (!can('disposisasdasda')) {
+        //     //         next('/404');
+        //     //     } else {
+        //     //         next();
+        //     //     }
+        //     // },
+        //     meta: {
+        //         layout: 'web',
+        //         auth: undefined
+        //     }
+        // },
+        {
+            path: '/layanan',
+            name: 'Daftar Layanan',
+            component: () => import('@/pages/Web/layanan/Index.vue'),
+            children: [
+                // {
+                //     path: '/',
+                // },
+                {
+                    path: 'daftar',
+                    name: 'Daftar Permohonan',
+                    component: () => import('@/pages/Web/layanan/Permohonan.vue'),
+                    meta: {
+                        auth: true,
+                        layout: 'admin',
+                        // breadCrumb: 'Beranda'
+                    }
+                },
+            ]
+            // meta: {
+            //     src: require('@/assets/about.jpg'),
+            //     layout: 'web',
+            //     auth: undefined
+            // },
+        },
+        {
+            path: '/contact-us',
+            name: 'Contact',
+            component: () => import('@/pages/Web/contact-us/Index.vue'),
+            meta: {
+                src: require('@/assets/contact.jpg'),
+                layout: 'web',
+                auth: undefined
+            },
+        },
+        {
+            path: '/pro',
+            name: 'Pro',
+            component: () => import('@/pages/Web/pro/Index.vue'),
+            meta: {
+                src: require('@/assets/pro.jpg'),
+                layout: 'web',
+                auth: undefined
+            },
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: () => import('@/pages/Register.vue'),
+            meta: {
+                layout: 'auth',
+                auth: false
+            }
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: () => import('@/pages/Login.vue'),
+            meta: {
+                layout: 'auth',
+                auth: false
+            }
+        },
+        {
+            path: '/dashboard',
+            component: () => import('@/pages/Dashboard/Index.vue'),
+            meta: { breadCrumb: 'Dashboard' },
+            children: [
                 {
                     path: '/',
-                    name: 'Home',
-                    component: () => import('@/pages/Web/home/Index.vue'),
+                    redirect: 'beranda'
+                },
+                {
+                    path: 'beranda',
+                    name: 'dashboard.home',
+                    component: () => import('@/pages/Dashboard/Home.vue'),
                     meta: {
-                        layout: 'web',
-                        auth: undefined
+                        auth: true,
+                        layout: 'admin',
+                        breadCrumb: 'Beranda'
                     }
                 },
                 {
-                    path: '/can-tampil',
-                    name: 'can tampil',
-                    component: () => import('@/pages/Home/Index.vue'),
-                    // beforeEnter (to, from, next) {
-                    //     if (!can('disposisasdasda')) {
-                    //         next('/404');
-                    //     } else {
-                    //         next();
-                    //     }
-                    // },
-                    meta: {
-                        layout: 'web',
-                        auth: undefined
-                    }
-                },
-                {
-                    path: '/layanan',
-                    name: 'Daftar Layanan',
-                    component: () => import('@/pages/Web/layanan/Index.vue'),
-                    children: [
-                        // {
-                        //     path: '/',
-                        // },
-                        {
-                            path: 'daftar',
-                            name: 'Daftar Permohonan',
-                            component: () => import('@/pages/Web/layanan/Permohonan.vue'),
-                            meta: {
-                                auth: true,
-                                layout: 'admin',
-                                // breadCrumb: 'Beranda'
-                            }
-                        },
-                    ]
-                    // meta: {
-                    //     src: require('@/assets/about.jpg'),
-                    //     layout: 'web',
-                    //     auth: undefined
-                    // },
-                },
-                {
-                    path: '/contact-us',
-                    name: 'Contact',
-                    component: () => import('@/pages/Web/contact-us/Index.vue'),
-                    meta: {
-                        src: require('@/assets/contact.jpg'),
-                        layout: 'web',
-                        auth: undefined
-                    },
-                },
-                {
-                    path: '/pro',
-                    name: 'Pro',
-                    component: () => import('@/pages/Web/pro/Index.vue'),
-                    meta: {
-                        src: require('@/assets/pro.jpg'),
-                        layout: 'web',
-                        auth: undefined
-                    },
-                },
-                {
-                    path: '/register',
-                    name: 'register',
-                    component: () => import('@/pages/Register.vue'),
-                    meta: {
-                        layout: 'auth',
-                        auth: false
-                    }
-                },
-                {
-                    path: '/login',
-                    name: 'login',
-                    component: () => import('@/pages/Login.vue'),
-                    meta: {
-                        layout: 'auth',
-                        auth: false
-                    }
-                },
-                {
-                    path: '/dashboard',
-                    component: () => import('@/pages/Dashboard/Index.vue'),
-                    meta: { breadCrumb: 'Dashboard' },
+                    path: 'permohonan',
+                    name: 'dashboard.permohonan',
+                    meta: { breadCrumb: 'Permohonan' },
+                    component: () => import('@/pages/Dashboard/permohonan/Index.vue'),
                     children: [
                         {
                             path: '/',
-                            redirect: 'beranda'
+                            redirect: 'list'
                         },
-                        {
-                            path: 'beranda',
-                            name: 'dashboard.home',
-                            component: () => import('@/pages/Dashboard/Home.vue'),
+                        {                           
+                            path: 'list',
+                            name: 'dashboard.permohonan.list',
+                            component: () => import('@/pages/Dashboard/permohonan/List.vue'),
                             meta: {
-                                auth: true,
                                 layout: 'admin',
-                                breadCrumb: 'Beranda'
+                                auth: true,
+                                breadCrumb: 'List'
                             }
-                        },            
+                        },
+                        // {
+                        //     path: 'create',
+                        //     name: 'dashboard.anime.list',
+                        //     component: AdminAnimeAdd,
+                        //     meta: {
+                        //         layout: 'admin',
+                        //         auth: true,
+                        //         breadCrumb: 'Create'
+                        //     }
+                        // },
+                        // {
+                        //     path:'edit/:id',
+                        //     name:'anime.edit',
+                        //     component: require('../pages/admin/Anime/components/AnimeLists'),
+                        //     props: (route) => ({propUserId: route.params.id}),
+                        // }
                     ]
-                },               
-                {
-                    path: '/*',
-                    name: 'FourOhFour',
-                    component: () => import('@/pages/Web/404/Index.vue'),
-                    meta: {
-                        layout: 'web',
-                        auth: undefined
-                    }
                 },
-            ],
-        // },
+            ]
+        },
+        {
+            path: '/*',
+            name: 'FourOhFour',
+            component: () => import('@/pages/Web/404/Index.vue'),
+            meta: {
+                layout: 'web',
+                auth: undefined
+            }
+        },
+    ],
+    // },
 
     // ],
 })
