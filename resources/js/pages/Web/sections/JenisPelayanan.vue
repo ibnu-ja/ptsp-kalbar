@@ -48,6 +48,7 @@
           cols=12
           md=8
         >
+        <h5 class="text-h5 py-2">{{subkategori[activeSub]}}</h5>
           <v-expansion-panels
             v-model="panel"
             :disabled="loading"
@@ -59,12 +60,8 @@
             >
               <v-expansion-panel-header class="text-h6">{{layanan.name}}</v-expansion-panel-header>
               <v-expansion-panel-content>
-                Deskripsi: {{layanan.deskripsi}}<br />
-                1. Mendaftarkan diri menjadi peserta Tender dilaman LPSE.Kemenag.go.id<br />
-                2. Mendownload dokumen pemilihan<br />
-                3. Mengikuti tahapan pemberian penjelasan<br />
-                4. Mengupload dukumen penawaran<br />
-                5. Menghadiri pembuktian klarifikasi<br />
+                <div v-html="layanan.deskripsi"></div>
+                <v-btn link class="py-2">Daftar Permohonan</v-btn>
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
@@ -91,6 +88,7 @@ export default {
     items: [],
     subkategori: ['Layanan Barang Publik', 'Layanan Jasa Publik', 'Layanan Administrasi'],
     layanans: '',
+    activeSub: 0,
     loading: true,
     panel: 0,
     readonly: false,
@@ -115,6 +113,7 @@ export default {
     tampilLayanan (layanan, subkategori) {
       var that = this
       that.loading = true
+      that.activeSub = subkategori
       axios
         .get(
           '/api/layanan?kategori=' + layanan + '&subkategori=' + (subkategori + 1)
