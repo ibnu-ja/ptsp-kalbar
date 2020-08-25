@@ -7,20 +7,20 @@ Vue.use(Router)
 
 const router = new Router({
     mode: 'history',
-    base: process.env.BASE_URL,
-    scrollBehavior: (to, from, savedPosition) => {
-        if (to.hash) return { selector: to.hash }
-        if (savedPosition) return savedPosition
+    // base: process.env.BASE_URL,
+    // scrollBehavior: (to, from, savedPosition) => {
+    //     if (to.hash) return { selector: to.hash }
+    //     if (savedPosition) return savedPosition
 
-        return { x: 0, y: 0 }
-    },
+    //     return { x: 0, y: 0 }
+    // },
     routes: [
-        {
-            path: '/',
-            component: () => import('@/layouts/home/Index.vue'),
-            children: [
+        // {
+        //     path: '/',
+        //     component: () => import('@/layouts/home/Index.vue'),
+        //     children: [
                 {
-                    path: '',
+                    path: '/',
                     name: 'Home',
                     component: () => import('@/pages/Web/home/Index.vue'),
                     meta: {
@@ -29,17 +29,48 @@ const router = new Router({
                     }
                 },
                 {
-                    path: 'perizinan',
-                    name: 'Perizinan',
-                    component: () => import('@/pages/Web/perizinan/Index.vue'),
+                    path: '/can-tampil',
+                    name: 'can tampil',
+                    component: () => import('@/pages/Home/Index.vue'),
+                    // beforeEnter (to, from, next) {
+                    //     if (!can('disposisasdasda')) {
+                    //         next('/404');
+                    //     } else {
+                    //         next();
+                    //     }
+                    // },
                     meta: {
-                        src: require('@/assets/about.jpg'),
                         layout: 'web',
                         auth: undefined
-                    },
+                    }
                 },
                 {
-                    path: 'contact-us',
+                    path: '/layanan',
+                    name: 'Daftar Layanan',
+                    component: () => import('@/pages/Web/layanan/Index.vue'),
+                    children: [
+                        // {
+                        //     path: '/',
+                        // },
+                        {
+                            path: 'daftar',
+                            name: 'Daftar Permohonan',
+                            component: () => import('@/pages/Web/layanan/Permohonan.vue'),
+                            meta: {
+                                auth: true,
+                                layout: 'admin',
+                                // breadCrumb: 'Beranda'
+                            }
+                        },
+                    ]
+                    // meta: {
+                    //     src: require('@/assets/about.jpg'),
+                    //     layout: 'web',
+                    //     auth: undefined
+                    // },
+                },
+                {
+                    path: '/contact-us',
                     name: 'Contact',
                     component: () => import('@/pages/Web/contact-us/Index.vue'),
                     meta: {
@@ -49,7 +80,7 @@ const router = new Router({
                     },
                 },
                 {
-                    path: 'pro',
+                    path: '/pro',
                     name: 'Pro',
                     component: () => import('@/pages/Web/pro/Index.vue'),
                     meta: {
@@ -59,7 +90,46 @@ const router = new Router({
                     },
                 },
                 {
-                    path: '*',
+                    path: '/register',
+                    name: 'register',
+                    component: () => import('@/pages/Register.vue'),
+                    meta: {
+                        layout: 'auth',
+                        auth: false
+                    }
+                },
+                {
+                    path: '/login',
+                    name: 'login',
+                    component: () => import('@/pages/Login.vue'),
+                    meta: {
+                        layout: 'auth',
+                        auth: false
+                    }
+                },
+                {
+                    path: '/dashboard',
+                    component: () => import('@/pages/Dashboard/Index.vue'),
+                    meta: { breadCrumb: 'Dashboard' },
+                    children: [
+                        {
+                            path: '/',
+                            redirect: 'beranda'
+                        },
+                        {
+                            path: 'beranda',
+                            name: 'dashboard.home',
+                            component: () => import('@/pages/Dashboard/Home.vue'),
+                            meta: {
+                                auth: true,
+                                layout: 'admin',
+                                breadCrumb: 'Beranda'
+                            }
+                        },            
+                    ]
+                },               
+                {
+                    path: '/*',
                     name: 'FourOhFour',
                     component: () => import('@/pages/Web/404/Index.vue'),
                     meta: {
@@ -68,9 +138,9 @@ const router = new Router({
                     }
                 },
             ],
-        },
+        // },
 
-    ],
+    // ],
 })
 
 router.beforeEach((to, from, next) => {
