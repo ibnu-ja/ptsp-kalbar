@@ -22474,81 +22474,81 @@ a:-webkit-any-link {
 var map = {
 	"./404.vue": [
 		"./resources/js/pages/Web/sections/404.vue",
-		17
+		15
 	],
 	"./AboutOurProduct.vue": [
 		"./resources/js/pages/Web/sections/AboutOurProduct.vue",
-		26
+		23
 	],
 	"./Affiliates.vue": [
 		"./resources/js/pages/Web/sections/Affiliates.vue",
-		21,
-		3
+		19,
+		4
 	],
 	"./Carousel.vue": [
 		"./resources/js/pages/Web/sections/Carousel.vue",
-		9,
-		27
+		10,
+		24
 	],
 	"./ContactUs.vue": [
 		"./resources/js/pages/Web/sections/ContactUs.vue",
-		28
+		25
 	],
 	"./Features.vue": [
 		"./resources/js/pages/Web/sections/Features.vue",
-		29
+		26
 	],
 	"./Hero.vue": [
 		"./resources/js/pages/Web/sections/Hero.vue",
-		18
+		16
 	],
 	"./HeroAlt.vue": [
 		"./resources/js/pages/Web/sections/HeroAlt.vue",
-		13
+		11
 	],
 	"./Info.vue": [
 		"./resources/js/pages/Web/sections/Info.vue",
-		14
+		12
 	],
 	"./JenisPelayanan.vue": [
 		"./resources/js/pages/Web/sections/JenisPelayanan.vue",
-		16,
-		30
+		13,
+		27
 	],
 	"./KeepInTouch.vue": [
 		"./resources/js/pages/Web/sections/KeepInTouch.vue",
-		31
+		28
 	],
 	"./Map.vue": [
 		"./resources/js/pages/Web/sections/Map.vue",
-		32
+		29
 	],
 	"./Newsletter.vue": [
 		"./resources/js/pages/Web/sections/Newsletter.vue",
-		33
+		30
 	],
 	"./ProFeatures.vue": [
 		"./resources/js/pages/Web/sections/ProFeatures.vue",
 		0,
-		15,
-		19,
-		39
+		2,
+		17,
+		38
 	],
 	"./ProsesPelayanan.vue": [
 		"./resources/js/pages/Web/sections/ProsesPelayanan.vue",
-		34
+		31
 	],
 	"./Scrolling.vue": [
 		"./resources/js/pages/Web/sections/Scrolling.vue",
-		20
+		18
 	],
 	"./SocialMedia.vue": [
 		"./resources/js/pages/Web/sections/SocialMedia.vue",
-		35
+		32
 	],
 	"./ThemeFeatures.vue": [
 		"./resources/js/pages/Web/sections/ThemeFeatures.vue",
-		36
+		33
 	]
 };
 function webpackAsyncContext(req) {
