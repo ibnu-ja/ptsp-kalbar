@@ -5,7 +5,7 @@
 <script>
 
 const default_layout = 'web'
-import Web from './layouts/Web'
+import Web from '@/layouts/home/Index.vue'
 import Admin from './layouts/Admin'
 import Auth from './layouts/Auth'
 
