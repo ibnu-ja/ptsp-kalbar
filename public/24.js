@@ -33,7 +33,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! @/layouts/home/Footer */ "./resources/js/layouts/home/Footer.vue"));
     },
     HomeSettings: function HomeSettings() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! @/layouts/home/Settings */ "./resources/js/layouts/home/Settings.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(15), __webpack_require__.e(38)]).then(__webpack_require__.bind(null, /*! @/layouts/home/Settings */ "./resources/js/layouts/home/Settings.vue"));
     },
     HomeSystemBar: function HomeSystemBar() {
       return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! @/layouts/home/SystemBar */ "./resources/js/layouts/home/SystemBar.vue"));

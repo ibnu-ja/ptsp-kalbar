@@ -363,8 +363,9 @@ var map = {
 	"./ProFeatures.vue": [
 		"./resources/js/pages/Web/sections/ProFeatures.vue",
 		0,
-		1,
-		19
+		15,
+		19,
+		39
 	],
 	"./ProsesPelayanan.vue": [
 		"./resources/js/pages/Web/sections/ProsesPelayanan.vue",
