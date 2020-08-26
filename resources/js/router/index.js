@@ -164,6 +164,44 @@ const router = new Router({
                         // }
                     ]
                 },
+                {
+                    path: 'layanan',
+                    name: 'dashboard.layanan',
+                    meta: { breadCrumb: 'Layanan' },
+                    component: () => import('@/pages/Dashboard/layanan/Index.vue'),
+                    children: [
+                        {
+                            path: '/',
+                            redirect: 'list'
+                        },
+                        {                           
+                            path: 'list',
+                            name: 'dashboard.layanan.list',
+                            component: () => import('@/pages/Dashboard/layanan/List.vue'),
+                            meta: {
+                                layout: 'admin',
+                                auth: true,
+                                breadCrumb: 'List'
+                            }
+                        },
+                        {
+                            path: 'tambah',
+                            name: 'dashboard.layanan.tambah',
+                            component: () => import('@/pages/Dashboard/layanan/FormAdd.vue'),
+                            meta: {
+                                layout: 'admin',
+                                auth: true,
+                                breadCrumb: 'Tambah'
+                            }
+                        },
+                        // {
+                        //     path:'edit/:id',
+                        //     name:'anime.edit',
+                        //     component: require('../pages/admin/Anime/components/AnimeLists'),
+                        //     props: (route) => ({propUserId: route.params.id}),
+                        // }
+                    ]
+                },
             ]
         },
         {
