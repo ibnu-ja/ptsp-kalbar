@@ -87,26 +87,35 @@ export default {
         'icon-alt': 'mdi-chevron-down',
         'icon-prepend': 'mdi-handshake',
         text: 'Permohonan',
-        model: true,
+        model: null,
+        url: '/dashboard/permohonan',
         children: [
           { icon: 'mdi-account-details', text: 'List', link: '/dashboard/permohonan/list' },
-          { icon: 'mdi-account-star', text: 'Disposisi' },
+          { icon: 'mdi-account-star', text: 'Disposisi', link: '/dashboard/permohonan/disposisi' },
         ],
       },
       {
         icon: 'mdi-chevron-down',
         'icon-alt': 'mdi-chevron-down',
-        'icon-prepend': 'mdi-handshake',
-        text: 'asdaaa',
-        model: false,
+        'icon-prepend': 'mdi-walk',
+        text: 'Layanan',
+        url: '/dashboard/layanan',
+        model: null,
         children: [
-          { icon: 'mdi-account-details', text: 'asdsa', link: '/asdasdasdasdsadas' },
-          { icon: 'mdi-account-details', text: 'asd', link: '/asdasdasdasdasd' },
-          { icon: 'mdi-account-details', text: 'asdasdasd', link: '/asd' },
-          { icon: 'mdi-account-star', text: 'Disposisi', link: '/asdasdasd' },
+          { icon: 'mdi-account-details', text: 'List', link: '/dashboard/layanan/list' },
+          { icon: 'mdi-plus', text: 'Tambah', link: '/dashboard/layanan/tambah' },
         ],
       },
     ],
   }),
+  methods: {
+  },
+  mounted () {
+    for (var item in this.items) {
+      this.items[item].model = (this.$route.matched[1].path == this.items[item].url) ? true : false
+    }
+  },
+  watch: {
+  },
 }
 </script>
