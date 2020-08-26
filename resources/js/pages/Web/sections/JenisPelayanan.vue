@@ -116,7 +116,7 @@ export default {
       that.activeSub = subkategori
       axios
         .get(
-          '/api/layanan?kategori=' + layanan + '&subkategori=' + (subkategori + 1)
+          '/api/tampil-layanan?kategori=' + layanan + '&subkategori=' + (subkategori + 1)
         )
         .then(function (response) {
           that.layanans = response.data.data
