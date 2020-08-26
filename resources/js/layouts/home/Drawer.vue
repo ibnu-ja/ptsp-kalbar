@@ -29,7 +29,7 @@
 
     props: {
       items: {
-        type: Array,
+        type: Object,
         default: () => ([]),
       },
     },
