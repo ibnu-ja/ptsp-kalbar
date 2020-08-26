@@ -1,19 +1,14 @@
 import Vue from 'vue'
 
-const permission = {
-    install (Vue, options) {
-        Vue.prototype.can = (permissionName) => {
-            let hasAccess;
-            axios.get(`/api/permission/${permissionName}`)
-                .then(() => {
-                    hasAccess = true;
-                })
-                .catch(() => {
-                    hasAccess = false;
-                })
-            return hasAccess;
+Vue.mixin({
+    methods: {
+        can (obj, string) {
+            for (const key in obj) {
+                if (obj[key].name == string) {
+                    return true;
+                }
+            }
+            return false;
         }
-    },
-}
-
-Vue.use(permission)
+    }
+})
