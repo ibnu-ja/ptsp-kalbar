@@ -1,14 +1,36 @@
 <template>
   <div>
+    <div>
+      <v-alert
+        type="error"
+        v-model="alert"
+        dismissible
+        v-for="(errors, i) in errorMsg"
+        :key="i"
+      >{{i}}<ul>
+          <li v-for="(error, j) in errors">{{error}}</li>
+        </ul>
+      </v-alert>
+    </div>
     <v-card>
       <v-card-title>
         Tambah Layanan
       </v-card-title>
       <v-divider></v-divider>
-      <v-container>
-        <ValidationObserver v-slot="{ validate, reset, invalid }">
-          <v-form @submit.prevent="tambahAnime">
-            <v-row no-gutters>
+      <ValidationObserver
+        v-slot="{ validate, reset, invalid }"
+        ref="observer"
+      >
+        <v-form
+          lazy-validation
+          @submit.prevent="submit"
+        >
+          <v-card-text>
+            <v-row
+              no-gutters
+              align="center"
+              justify="center"
+            >
               <v-col cols=12>
                 <ValidationProvider
                   v-slot="{ errors }"
@@ -18,7 +40,7 @@
                   <v-text-field
                     label="Nama"
                     :error-messages="errors"
-                    v-model="items.nama"
+                    v-model="items.name"
                   ></v-text-field>
                 </ValidationProvider>
               </v-col>
@@ -28,11 +50,28 @@
                   name="Kategori layanan"
                   rules="required"
                 >
-                  <v-autocomplete
+                  <v-combobox
                     v-model="items.kategori"
+                    :error-messages="errors"
                     :items="kategori"
                     label="Kategori layanan"
-                  ></v-autocomplete>
+                  ></v-combobox>
+                </ValidationProvider>
+              </v-col>
+              <v-col cols=12>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Subkategori layanan"
+                  rules="required"
+                >
+                  <v-select
+                    :items="subkategori"
+                    v-model="items.subkategori"
+                    :error-messages="errors"
+                    item-text="text"
+                    item-value="value"
+                    label="Subkategori"
+                  ></v-select>
                 </ValidationProvider>
               </v-col>
               <v-col cols="12">
@@ -44,9 +83,26 @@
                 ></ckeditor>
               </v-col>
             </v-row>
-          </v-form>
-        </ValidationObserver>
-      </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn
+              color="secondary"
+              @click="clear"
+            >
+              clear
+            </v-btn>
+            <v-btn
+              type="submit"
+              class="mr-4"
+              color="primary"
+              :disabled="invalid"
+            >
+              submit
+            </v-btn>
+          </v-card-actions>
+        </v-form>
+      </ValidationObserver>
     </v-card>
   </div>
 </template>
@@ -74,30 +130,21 @@ export default {
     return {
       mal_id: "",
       items: {
-        nama: "",
-        kategori: [],
+        name: "",
+        kategori: "",
+        subkategori: "",
         deskripsi: "",
       },
-      editor: ClassicEditor,
-      editorConfig: {
-        // The configuration of the rich-text editor.
-        language: 'de'
-      },
-      states: [
-        { name: 'Florida', abbr: 'FL', id: 1 },
-        { name: 'Georgia', abbr: 'GA', id: 2 },
-        { name: 'Nebraska', abbr: 'NE', id: 3 },
-        { name: 'California', abbr: 'CA', id: 4 },
-        { name: 'New York', abbr: 'NY', id: 5 },
+      dialog: true,
+      errorMsg: {},
+      subkategori: [
+        { text: 'Layanan Barang Publik', value: 0 },
+        { text: 'Layanan Jasa Publik', value: 1 },
+        { text: 'Layanan Administrasi', value: 3 },
       ],
+      editor: ClassicEditor,
       kategori: [],
-      valid: false,
-      alert: {
-        show: false,
-        icon: "",
-        color: "",
-        message: ""
-      },
+      alert: false,
     };
   },
   mounted () {
@@ -108,73 +155,44 @@ export default {
       }).catch(function (e) {
         console.log(e)
       });
-    // console.log()
-  },
-  watch: {
-    // tab (newTab, oldTab) {
-    //   if (newTab == 1) {
-    //     this.gambar.img = null
-    //   }
-    //   else {
-    //     this.gambar.imageData = null
-    //     this.gambar.img = null
-    //   }
-    // },
-    // "gambar.img" (newImg) {
-    //   if (!newImg) {
-    //     this.gambar.imageData = null
-    //     this.gambar.img = null
-    //   }
-    // }
   },
   methods: {
-    customFilter (item, queryText, itemText) {
-      const textOne = item.name.toLowerCase()
-      const textTwo = item.abbr.toLowerCase()
-      const searchText = queryText.toLowerCase()
-
-      return textOne.indexOf(searchText) > -1 ||
-        textTwo.indexOf(searchText) > -1
-    },
-    tambahAlt () {
-      this.items.title_synonyms.push("")
-    },
-    hapusAlt (index) {
-      this.items.title_synonyms.splice(index, 1)
-    },
-    // previewImg (e) {
-    //   var input = event.target;
-    //   if (input.files && input.files[0]) {
-    //     var reader = new FileReader();
-    //     reader.onload = (e) => {
-    //       // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
-    //       // Read image as base64 and set to imageData
-    //       this.gambar.imageData = e.target.result;
-    //     }
-    //     // Start the reader job - read file as a data url (base64 format)
-    //     reader.readAsDataURL(input.files[0]);
-    //   }
-    // },
     clear () {
-      var self = this;
-      self.items.title_english = ""
-      self.items.title_japanese = ""
+      var self = this
+      self.items.name = ""
+      self.items.kategori = ""
+      self.items.subkategori = ""
+      self.items.deskripsi = ""
+      self.$refs.observer.reset();
     },
-    save () {
-
+    async submit () {
       const self = this;
 
+      const isValid = await this.$refs.observer.validate();
+      if (!isValid) {
+        self.errorMsg = { Validation: "Data tidak valid!" }
+      }
       let payload = {
-        malId: self.malId,
-        email: self.email,
-      };
+        name: "",
+        kategori: self.items.kategori,
+        subkategori: self.items.subkategori,
+        deskripsi: self.items.deskripsi,
+      }
+      axios.post('/api/layanan', payload)
+        .then(function (response) {
+          self.$store.commit('hideLoader');
+          // reset the values ...
+          self.clear();
+        })
+        .catch(function (e) {
+          // console.log()
+          console.log(e.response)
+          self.alert = true
+          self.errorMsg = JSON.parse(e.response.request.response)
+          // self.dialog = true
 
-      self.$store.commit('showLoader');
-
-      axios.post('/admin/anime', payload).then(function (response) {
-
-      });
-    },
+        });
+    }
   }
 };
 </script>
