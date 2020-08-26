@@ -24,7 +24,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'DashBaseView',
   components: {
     DashBreadcrumb: function DashBreadcrumb() {
-      return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./Breadcrumb */ "./resources/js/layouts/admin/Breadcrumb.vue"));
+      return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./Breadcrumb */ "./resources/js/layouts/admin/Breadcrumb.vue"));
     }
   }
 });
