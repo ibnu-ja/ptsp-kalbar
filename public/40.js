@@ -16,9 +16,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Beranda',
   data: function data() {
     return {};
+  },
+  methods: {},
+  mounted: function mounted() {// getUser()
+    // console.log('asdasd')
   }
 });
 
@@ -39,16 +46,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "component-wrap" }, [
+    _c("div", {}, [
+      _vm._v(
+        "\n    " +
+          _vm._s(_vm.can(this.$auth.user().permissions, "disposisi")) +
+          "\n    "
+      )
+    ])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "component-wrap" }, [_c("div", {})])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

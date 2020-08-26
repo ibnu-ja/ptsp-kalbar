@@ -124,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
       var that = this;
       that.loading = true;
       that.activeSub = subkategori;
-      axios.get('/api/layanan?kategori=' + layanan + '&subkategori=' + (subkategori + 1)).then(function (response) {
+      axios.get('/api/tampil-layanan?kategori=' + layanan + '&subkategori=' + (subkategori + 1)).then(function (response) {
         that.layanans = response.data.data;
         that.loading = false;
       })["catch"](function (error) {

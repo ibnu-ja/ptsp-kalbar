@@ -89,48 +89,98 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       dialog: false,
-      items: [{
-        icon: 'mdi-home',
-        text: 'PTSP',
-        link: '/'
-      }, {
-        icon: 'mdi-view-dashboard',
-        text: 'Beranda',
-        link: '/dashboard/beranda'
-      }, // { icon: 'mdi-handshake', text: 'Layanan' },
-      {
-        icon: 'mdi-chevron-down',
-        'icon-alt': 'mdi-chevron-down',
-        'icon-prepend': 'mdi-handshake',
-        text: 'Permohonan',
-        model: null,
-        url: '/dashboard/permohonan',
-        children: [{
-          icon: 'mdi-account-details',
-          text: 'List',
-          link: '/dashboard/permohonan/list'
+      items: {
+        pegawai: [{
+          icon: 'mdi-home',
+          text: 'PTSP',
+          link: '/'
         }, {
-          icon: 'mdi-account-star',
-          text: 'Disposisi',
-          link: '/dashboard/permohonan/disposisi'
-        }]
-      }, {
-        icon: 'mdi-chevron-down',
-        'icon-alt': 'mdi-chevron-down',
-        'icon-prepend': 'mdi-walk',
-        text: 'Layanan',
-        url: '/dashboard/layanan',
-        model: null,
-        children: [{
-          icon: 'mdi-account-details',
-          text: 'List',
-          link: '/dashboard/layanan/list'
+          icon: 'mdi-view-dashboard',
+          text: 'Beranda',
+          link: '/dashboard/beranda'
         }, {
-          icon: 'mdi-plus',
-          text: 'Tambah',
-          link: '/dashboard/layanan/tambah'
+          icon: 'mdi-chevron-down',
+          icon_alt: 'mdi-chevron-down',
+          icon_prepend: 'mdi-handshake',
+          text: 'Permohonan',
+          model: null,
+          url: '/dashboard/permohonan',
+          children: [{
+            icon: 'mdi-format-list-bulleted',
+            text: 'List',
+            link: '/dashboard/permohonan/list'
+          }, {
+            icon: 'mdi-plus',
+            text: 'Tambah',
+            link: '/dashboard/permohonan/tambah'
+          }, {
+            icon: 'mdi-hand-right',
+            text: 'Disposisi',
+            link: '/dashboard/permohonan/disposisi'
+          }, {
+            icon: 'mdi-list-status',
+            text: 'Status',
+            link: '/dashboard/permohonan/status'
+          }]
+        }, {
+          icon: 'mdi-chevron-down',
+          icon_alt: 'mdi-chevron-down',
+          icon_prepend: 'mdi-walk',
+          text: 'Layanan',
+          url: '/dashboard/layanan',
+          model: null,
+          children: [{
+            icon: 'mdi-format-list-bulleted',
+            text: 'List',
+            link: '/dashboard/layanan/list'
+          }, {
+            icon: 'mdi-plus',
+            text: 'Tambah',
+            link: '/dashboard/layanan/tambah'
+          }]
+        }],
+        user: [{
+          icon: 'mdi-home',
+          text: 'PTSP',
+          link: '/'
+        }, {
+          icon: 'mdi-view-dashboard',
+          text: 'Beranda',
+          link: '/dashboard/beranda'
+        }, {
+          icon: 'mdi-chevron-down',
+          icon_alt: 'mdi-chevron-down',
+          icon_prepend: 'mdi-handshake',
+          text: 'Permohonan',
+          model: null,
+          url: '/dashboard/permohonan',
+          children: [{
+            icon: 'mdi-account-details',
+            text: 'List',
+            link: '/dashboard/permohonan/list'
+          }, {
+            icon: 'mdi-account-star',
+            text: 'Disposisi',
+            link: '/dashboard/permohonan/disposisi'
+          }]
+        }, {
+          icon: 'mdi-chevron-down',
+          icon_alt: 'mdi-chevron-down',
+          icon_prepend: 'mdi-walk',
+          text: 'Layanan',
+          url: '/dashboard/layanan',
+          model: null,
+          children: [{
+            icon: 'mdi-account-details',
+            text: 'List',
+            link: '/dashboard/layanan/list'
+          }, {
+            icon: 'mdi-plus',
+            text: 'Tambah',
+            link: '/dashboard/layanan/tambah'
+          }]
         }]
-      }]
+      }
     };
   },
   methods: {},
@@ -186,7 +236,7 @@ var render = function() {
         "v-list",
         { attrs: { dense: "" } },
         [
-          _vm._l(_vm.items, function(item) {
+          _vm._l(_vm.items.pegawai, function(item) {
             return [
               item.heading
                 ? _c(
@@ -233,8 +283,8 @@ var render = function() {
                     {
                       key: item.text,
                       attrs: {
-                        "prepend-icon": item["icon-prepend"],
-                        "append-icon": item.model ? item.icon : item["icon-alt"]
+                        "prepend-icon": item.icon_prepend,
+                        "append-icon": item.model ? item.icon : item.icon_alt
                       },
                       scopedSlots: _vm._u(
                         [
