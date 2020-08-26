@@ -34,15 +34,14 @@ Route::group(['middleware' => 'auth:api'], function () {
     });
     // Users
     Route::get('testing', function () {
+        auth()->user()->syncRoles(['admin']);
+    });
+    Route::group(['middleware' => ['permission:add layanan|view layanan']], function () {
+        Route::get('layanan', 'LayananController@index');
+        Route::post('layanan', 'LayananController@store');
+        Route::get('layanan/{id}', 'LayananController@show');
 
-        auth()->user()->syncRoles(['pimpinan']);
-        // auth()->user()->syncRoles(['operator', 'admin']);
-        // return auth()->user()->can(['add permohonan','view permohonan']);
-        // $role = auth()->user()->getRoleNames();
-        // return auth()->user()->can('add permohonan');
-        // return response()->json(['roles' => $role]);
-        // return auth()->user()->hasAnyRole(['operator']);
-        // return response()->json(['roles' => $role]);
+        // Route::get('layanan/permohonan/{id}/berkas', 'PermohonanController@medialibrary');
     });
 
     Route::group(['middleware' => ['permission:add permohonan|view permohonan']], function () {
@@ -52,6 +51,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
         Route::get('layanan/permohonan/{id}/berkas', 'PermohonanController@medialibrary');
     });
+    
 });
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'admin'], function () {
@@ -61,5 +61,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('layanan', 'TampilLayananController@index');
+Route::get('tampil-layanan', 'TampilLayananController@index');
 Route::get('kategori', 'TampilLayananController@kategori');
