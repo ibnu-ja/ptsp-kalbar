@@ -12,6 +12,19 @@
         </ul>
       </v-alert>
     </div>
+    <v-snackbar v-model="snackbar" timeout="3000" color="success" top>
+      {{ snackbarMsg }}
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="pink"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
     <v-row>
       <v-col
         cols="12"
@@ -229,6 +242,7 @@
                 <v-btn
                   color="secondary"
                   @click="clear"
+                  :disabled="!layanan"
                 >
                   clear
                 </v-btn>
@@ -293,6 +307,8 @@ export default {
       alert: false,
       layanans: [],
       layanan: null,
+      snackbar: false,
+      snackbarMsg: null,
     }
   },
   watch: {
@@ -394,6 +410,10 @@ export default {
           self.$store.commit('hideLoader');
           // reset the values ...
           self.clear();
+          self.layanan = null
+          self.kategori = null
+          self.snackbarMsg = "Sukses!"
+          self.snackbar= true;
         })
         .catch(function (e) {
           // console.log()
