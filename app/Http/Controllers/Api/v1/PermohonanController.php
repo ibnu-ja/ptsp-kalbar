@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Resources\PermohonanResource;
 use App\Layanan;
 use Illuminate\Http\Request;
 use App\Permohonan;
 
-class PermohonanController extends Controller
+class PermohonanController extends ApiController
 {
     public function __construct()
     {
