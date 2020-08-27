@@ -4,7 +4,10 @@
     app
   >
     <v-list dense>
-      <template v-for="item in items">
+      <template
+        v-for="item in items"
+        v-if="$auth.check({permissions: item.permission})"
+      >
         <v-row
           v-if="item.heading"
           :key="item.heading"
@@ -29,8 +32,8 @@
           v-else-if="item.children"
           :key="item.text"
           v-model="item.model"
-          :prepend-icon="item['icon-prepend']"
-          :append-icon="item.model ? item.icon : item['icon-alt']"
+          :prepend-icon="item.icon_prepend"
+          :append-icon="item.model ? item.icon : item.icon_alt"
         >
           <template v-slot:activator>
             <v-list-item-content>
@@ -43,6 +46,7 @@
             v-for="(child, i) in item.children"
             :key="i"
             :to="child.link"
+            v-if="$auth.check({permissions: child.permission})"
           >
             <v-list-item-action v-if="child.icon">
               <v-icon>{{ child.icon }}</v-icon>
@@ -79,31 +83,34 @@ export default {
   data: () => ({
     dialog: false,
     items: [
-      { icon: 'mdi-home', text: 'PTSP', link: '/' },
-      { icon: 'mdi-view-dashboard', text: 'Beranda', link: '/dashboard/beranda' },
-      // { icon: 'mdi-handshake', text: 'Layanan' },
+      { icon: 'mdi-home', text: 'PTSP', link: '/', permission: ['permohonan', 'layanan'] },
+      { icon: 'mdi-view-dashboard', text: 'Beranda', link: '/dashboard/beranda', permission: ['permohonan', 'layanan'] },
       {
         icon: 'mdi-chevron-down',
-        'icon-alt': 'mdi-chevron-down',
-        'icon-prepend': 'mdi-handshake',
+        icon_alt: 'mdi-chevron-down',
+        icon_prepend: 'mdi-handshake',
         text: 'Permohonan',
         model: null,
         url: '/dashboard/permohonan',
+        permission: 'permohonan',
         children: [
-          { icon: 'mdi-account-details', text: 'List', link: '/dashboard/permohonan/list' },
-          { icon: 'mdi-account-star', text: 'Disposisi', link: '/dashboard/permohonan/disposisi' },
+          { icon: 'mdi-format-list-bulleted', text: 'List', link: '/dashboard/permohonan/list', permission: 'view permohonan' },
+          { icon: 'mdi-plus', text: 'Tambah', link: '/dashboard/permohonan/tambah', permission: 'add permohonan' },
+          { icon: 'mdi-hand-right', text: 'Disposisi', link: '/dashboard/permohonan/disposisi', permission: 'disposisi' },
+          { icon: 'mdi-list-status', text: 'Status', link: '/dashboard/permohonan/status', permission: 'edit status permohonan' },
         ],
       },
       {
         icon: 'mdi-chevron-down',
-        'icon-alt': 'mdi-chevron-down',
-        'icon-prepend': 'mdi-walk',
+        icon_alt: 'mdi-chevron-down',
+        icon_prepend: 'mdi-walk',
         text: 'Layanan',
         url: '/dashboard/layanan',
         model: null,
+        permission: 'layanan',
         children: [
-          { icon: 'mdi-account-details', text: 'List', link: '/dashboard/layanan/list' },
-          { icon: 'mdi-plus', text: 'Tambah', link: '/dashboard/layanan/tambah' },
+          { icon: 'mdi-format-list-bulleted', text: 'List', link: '/dashboard/layanan/list', permission: 'view layanan' },
+          { icon: 'mdi-plus', text: 'Tambah', link: '/dashboard/layanan/tambah', permission: 'add layanan' },
         ],
       },
     ],
