@@ -84,103 +84,74 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DashDrawer',
   data: function data() {
     return {
       dialog: false,
-      items: {
-        pegawai: [{
-          icon: 'mdi-home',
-          text: 'PTSP',
-          link: '/'
+      items: [{
+        icon: 'mdi-home',
+        text: 'PTSP',
+        link: '/',
+        permission: ['permohonan', 'layanan']
+      }, {
+        icon: 'mdi-view-dashboard',
+        text: 'Beranda',
+        link: '/dashboard/beranda',
+        permission: ['permohonan', 'layanan']
+      }, {
+        icon: 'mdi-chevron-down',
+        icon_alt: 'mdi-chevron-down',
+        icon_prepend: 'mdi-handshake',
+        text: 'Permohonan',
+        model: null,
+        url: '/dashboard/permohonan',
+        permission: 'permohonan',
+        children: [{
+          icon: 'mdi-format-list-bulleted',
+          text: 'List',
+          link: '/dashboard/permohonan/list',
+          permission: 'view permohonan'
         }, {
-          icon: 'mdi-view-dashboard',
-          text: 'Beranda',
-          link: '/dashboard/beranda'
+          icon: 'mdi-plus',
+          text: 'Tambah',
+          link: '/dashboard/permohonan/tambah',
+          permission: 'add permohonan'
         }, {
-          icon: 'mdi-chevron-down',
-          icon_alt: 'mdi-chevron-down',
-          icon_prepend: 'mdi-handshake',
-          text: 'Permohonan',
-          model: null,
-          url: '/dashboard/permohonan',
-          children: [{
-            icon: 'mdi-format-list-bulleted',
-            text: 'List',
-            link: '/dashboard/permohonan/list'
-          }, {
-            icon: 'mdi-plus',
-            text: 'Tambah',
-            link: '/dashboard/permohonan/tambah'
-          }, {
-            icon: 'mdi-hand-right',
-            text: 'Disposisi',
-            link: '/dashboard/permohonan/disposisi'
-          }, {
-            icon: 'mdi-list-status',
-            text: 'Status',
-            link: '/dashboard/permohonan/status'
-          }]
+          icon: 'mdi-hand-right',
+          text: 'Disposisi',
+          link: '/dashboard/permohonan/disposisi',
+          permission: 'disposisi'
         }, {
-          icon: 'mdi-chevron-down',
-          icon_alt: 'mdi-chevron-down',
-          icon_prepend: 'mdi-walk',
-          text: 'Layanan',
-          url: '/dashboard/layanan',
-          model: null,
-          children: [{
-            icon: 'mdi-format-list-bulleted',
-            text: 'List',
-            link: '/dashboard/layanan/list'
-          }, {
-            icon: 'mdi-plus',
-            text: 'Tambah',
-            link: '/dashboard/layanan/tambah'
-          }]
-        }],
-        user: [{
-          icon: 'mdi-home',
-          text: 'PTSP',
-          link: '/'
-        }, {
-          icon: 'mdi-view-dashboard',
-          text: 'Beranda',
-          link: '/dashboard/beranda'
-        }, {
-          icon: 'mdi-chevron-down',
-          icon_alt: 'mdi-chevron-down',
-          icon_prepend: 'mdi-handshake',
-          text: 'Permohonan',
-          model: null,
-          url: '/dashboard/permohonan',
-          children: [{
-            icon: 'mdi-account-details',
-            text: 'List',
-            link: '/dashboard/permohonan/list'
-          }, {
-            icon: 'mdi-account-star',
-            text: 'Disposisi',
-            link: '/dashboard/permohonan/disposisi'
-          }]
-        }, {
-          icon: 'mdi-chevron-down',
-          icon_alt: 'mdi-chevron-down',
-          icon_prepend: 'mdi-walk',
-          text: 'Layanan',
-          url: '/dashboard/layanan',
-          model: null,
-          children: [{
-            icon: 'mdi-account-details',
-            text: 'List',
-            link: '/dashboard/layanan/list'
-          }, {
-            icon: 'mdi-plus',
-            text: 'Tambah',
-            link: '/dashboard/layanan/tambah'
-          }]
+          icon: 'mdi-list-status',
+          text: 'Status',
+          link: '/dashboard/permohonan/status',
+          permission: 'edit status permohonan'
         }]
-      }
+      }, {
+        icon: 'mdi-chevron-down',
+        icon_alt: 'mdi-chevron-down',
+        icon_prepend: 'mdi-walk',
+        text: 'Layanan',
+        url: '/dashboard/layanan',
+        model: null,
+        permission: 'layanan',
+        children: [{
+          icon: 'mdi-format-list-bulleted',
+          text: 'List',
+          link: '/dashboard/layanan/list',
+          permission: 'view layanan'
+        }, {
+          icon: 'mdi-plus',
+          text: 'Tambah',
+          link: '/dashboard/layanan/tambah',
+          permission: 'add layanan'
+        }]
+      }]
     };
   },
   methods: {},
@@ -236,153 +207,168 @@ var render = function() {
         "v-list",
         { attrs: { dense: "" } },
         [
-          _vm._l(_vm.items.pegawai, function(item) {
-            return [
-              item.heading
-                ? _c(
-                    "v-row",
-                    { key: item.heading, attrs: { align: "center" } },
-                    [
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "6" } },
-                        [
-                          item.heading
-                            ? _c("v-subheader", [
-                                _vm._v(
-                                  "\n            " +
-                                    _vm._s(item.heading) +
-                                    "\n          "
-                                )
-                              ])
-                            : _vm._e()
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        { staticClass: "text-center", attrs: { cols: "6" } },
+          _vm._l(_vm.items, function(item) {
+            return _vm.$auth.check({ permissions: item.permission })
+              ? [
+                  item.heading
+                    ? _c(
+                        "v-row",
+                        { key: item.heading, attrs: { align: "center" } },
                         [
                           _c(
-                            "a",
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              item.heading
+                                ? _c("v-subheader", [
+                                    _vm._v(
+                                      "\n            " +
+                                        _vm._s(item.heading) +
+                                        "\n          "
+                                    )
+                                  ])
+                                : _vm._e()
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
                             {
-                              staticClass: "body-2 black--text",
-                              attrs: { href: "#!" }
+                              staticClass: "text-center",
+                              attrs: { cols: "6" }
                             },
-                            [_vm._v("EDIT")]
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "body-2 black--text",
+                                  attrs: { href: "#!" }
+                                },
+                                [_vm._v("EDIT")]
+                              )
+                            ]
                           )
-                        ]
+                        ],
+                        1
                       )
-                    ],
-                    1
-                  )
-                : item.children
-                ? _c(
-                    "v-list-group",
-                    {
-                      key: item.text,
-                      attrs: {
-                        "prepend-icon": item.icon_prepend,
-                        "append-icon": item.model ? item.icon : item.icon_alt
-                      },
-                      scopedSlots: _vm._u(
+                    : item.children
+                    ? _c(
+                        "v-list-group",
+                        {
+                          key: item.text,
+                          attrs: {
+                            "prepend-icon": item.icon_prepend,
+                            "append-icon": item.model
+                              ? item.icon
+                              : item.icon_alt
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "activator",
+                                fn: function() {
+                                  return [
+                                    _c(
+                                      "v-list-item-content",
+                                      [
+                                        _c("v-list-item-title", [
+                                          _vm._v(
+                                            "\n              " +
+                                              _vm._s(item.text) +
+                                              "\n            "
+                                          )
+                                        ])
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                },
+                                proxy: true
+                              }
+                            ],
+                            null,
+                            true
+                          ),
+                          model: {
+                            value: item.model,
+                            callback: function($$v) {
+                              _vm.$set(item, "model", $$v)
+                            },
+                            expression: "item.model"
+                          }
+                        },
                         [
-                          {
-                            key: "activator",
-                            fn: function() {
-                              return [
-                                _c(
-                                  "v-list-item-content",
+                          _vm._v(" "),
+                          _vm._l(item.children, function(child, i) {
+                            return _vm.$auth.check({
+                              permissions: child.permission
+                            })
+                              ? _c(
+                                  "v-list-item",
+                                  { key: i, attrs: { to: child.link } },
                                   [
-                                    _c("v-list-item-title", [
-                                      _vm._v(
-                                        "\n              " +
-                                          _vm._s(item.text) +
-                                          "\n            "
-                                      )
-                                    ])
+                                    child.icon
+                                      ? _c(
+                                          "v-list-item-action",
+                                          [
+                                            _c("v-icon", [
+                                              _vm._v(_vm._s(child.icon))
+                                            ])
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-list-item-content",
+                                      [
+                                        _c("v-list-item-title", [
+                                          _vm._v(
+                                            "\n              " +
+                                              _vm._s(child.text) +
+                                              "\n            "
+                                          )
+                                        ])
+                                      ],
+                                      1
+                                    )
                                   ],
                                   1
                                 )
-                              ]
-                            },
-                            proxy: true
-                          }
+                              : _vm._e()
+                          })
                         ],
-                        null,
-                        true
-                      ),
-                      model: {
-                        value: item.model,
-                        callback: function($$v) {
-                          _vm.$set(item, "model", $$v)
-                        },
-                        expression: "item.model"
-                      }
-                    },
-                    [
-                      _vm._v(" "),
-                      _vm._l(item.children, function(child, i) {
-                        return _c(
-                          "v-list-item",
-                          { key: i, attrs: { to: child.link } },
-                          [
-                            child.icon
-                              ? _c(
-                                  "v-list-item-action",
-                                  [_c("v-icon", [_vm._v(_vm._s(child.icon))])],
-                                  1
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c(
-                              "v-list-item-content",
-                              [
-                                _c("v-list-item-title", [
-                                  _vm._v(
-                                    "\n              " +
-                                      _vm._s(child.text) +
-                                      "\n            "
-                                  )
-                                ])
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      })
-                    ],
-                    2
-                  )
-                : _c(
-                    "v-list-item",
-                    { key: item.text, attrs: { to: item.link } },
-                    [
-                      _c(
-                        "v-list-item-action",
-                        [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-list-item-content",
+                        2
+                      )
+                    : _c(
+                        "v-list-item",
+                        { key: item.text, attrs: { to: item.link } },
                         [
-                          _c("v-list-item-title", [
-                            _vm._v(
-                              "\n            " +
-                                _vm._s(item.text) +
-                                "\n          "
-                            )
-                          ])
+                          _c(
+                            "v-list-item-action",
+                            [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-list-item-content",
+                            [
+                              _c("v-list-item-title", [
+                                _vm._v(
+                                  "\n            " +
+                                    _vm._s(item.text) +
+                                    "\n          "
+                                )
+                              ])
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
-                    ],
-                    1
-                  )
-            ]
+                ]
+              : _vm._e()
           })
         ],
         2

@@ -11,12 +11,14 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
-/* harmony import */ var vee_validate_dist_locale_id_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vee-validate/dist/locale/id.json */ "./node_modules/vee-validate/dist/locale/id.json");
-var vee_validate_dist_locale_id_json__WEBPACK_IMPORTED_MODULE_3___namespace = /*#__PURE__*/__webpack_require__.t(/*! vee-validate/dist/locale/id.json */ "./node_modules/vee-validate/dist/locale/id.json", 1);
-/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
-/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jodit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jodit */ "./node_modules/jodit/build/jodit.min.js");
+/* harmony import */ var jodit__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jodit__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var jodit_build_jodit_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jodit/build/jodit.min.css */ "./node_modules/jodit/build/jodit.min.css");
+/* harmony import */ var jodit_build_jodit_min_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jodit_build_jodit_min_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var vee_validate_dist_locale_id_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vee-validate/dist/locale/id.json */ "./node_modules/vee-validate/dist/locale/id.json");
+var vee_validate_dist_locale_id_json__WEBPACK_IMPORTED_MODULE_5___namespace = /*#__PURE__*/__webpack_require__.t(/*! vee-validate/dist/locale/id.json */ "./node_modules/vee-validate/dist/locale/id.json", 1);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -138,21 +140,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
-Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__).forEach(function (rule) {
-  Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])(rule, _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__[rule]), {}, {
+
+Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_4__).forEach(function (rule) {
+  Object(vee_validate__WEBPACK_IMPORTED_MODULE_3__["extend"])(rule, _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_4__[rule]), {}, {
     // copies rule configuration
-    message: vee_validate_dist_locale_id_json__WEBPACK_IMPORTED_MODULE_3__["messages"][rule] // assign message
+    message: vee_validate_dist_locale_id_json__WEBPACK_IMPORTED_MODULE_5__["messages"][rule] // assign message
 
   }));
 });
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__["ValidationProvider"],
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__["ValidationObserver"]
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_3__["ValidationProvider"],
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_3__["ValidationObserver"]
   },
   data: function data() {
     var self = this;
@@ -164,6 +182,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__).forEach(functi
         subkategori: "",
         deskripsi: ""
       },
+      editor: null,
       dialog: true,
       errorMsg: {},
       subkategori: [{
@@ -176,7 +195,6 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__).forEach(functi
         text: 'Layanan Administrasi',
         value: 3
       }],
-      editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_4___default.a,
       kategori: [],
       alert: false
     };
@@ -188,6 +206,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__).forEach(functi
     })["catch"](function (e) {
       console.log(e);
     });
+    this.editor = new jodit__WEBPACK_IMPORTED_MODULE_1__["Jodit"]('#tess');
   },
   methods: {
     clear: function clear() {
@@ -486,20 +505,28 @@ var render = function() {
                                   "v-col",
                                   { attrs: { cols: "12" } },
                                   [
-                                    _c("div", [_vm._v("Deskripsi")]),
-                                    _vm._v(" "),
-                                    _c("ckeditor", {
+                                    _c("ValidationProvider", {
                                       attrs: {
-                                        editor: _vm.editor,
-                                        config: _vm.editorConfig
+                                        name: "Deskripsi layanan",
+                                        rules: "required"
                                       },
-                                      model: {
-                                        value: _vm.items.deskripsi,
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.items, "deskripsi", $$v)
-                                        },
-                                        expression: "items.deskripsi"
-                                      }
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "default",
+                                            fn: function(ref) {
+                                              var errors = ref.errors
+                                              return [
+                                                _c("textarea", {
+                                                  attrs: { id: "tess" }
+                                                })
+                                              ]
+                                            }
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      )
                                     })
                                   ],
                                   1

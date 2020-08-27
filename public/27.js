@@ -75,7 +75,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'HomeAppBar',
   components: {
     HomeDrawer: function HomeDrawer() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(8), __webpack_require__.e(39)]).then(__webpack_require__.bind(null, /*! ./Drawer */ "./resources/js/layouts/home/Drawer.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9), __webpack_require__.e(39)]).then(__webpack_require__.bind(null, /*! ./Drawer */ "./resources/js/layouts/home/Drawer.vue"));
     }
   },
   data: function data() {

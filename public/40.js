@@ -50,7 +50,7 @@ var render = function() {
     _c("div", {}, [
       _vm._v(
         "\n    " +
-          _vm._s(_vm.can(this.$auth.user().permissions, "disposisi")) +
+          _vm._s(_vm.$auth.check({ permissions: ["add layanan"] })) +
           "\n    "
       )
     ])
