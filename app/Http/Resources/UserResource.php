@@ -14,6 +14,9 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
+        foreach ($this->getAllPermissions() as $item) {
+            $permissions[] = $item->name;
+        }
         return [
             "id"=> $this->id,
             "name"=> $this->name,
@@ -21,8 +24,7 @@ class UserResource extends JsonResource
             "alamat"=> $this->alamat,
             "nip"=> $this->nip,
             "email"=> $this->email,
-            "roles" => $this->getRoleNames(),
-            "permissions" => $this->getAllPermissions(),
+            "roles" => ["role" => $this->getRoleNames(), "permissions" => $permissions],
             "email_verified_at"=> $this->email_verified_at,
             "created_at"=> $this->created_at,
             "updated_at"=> $this->updated_at,
@@ -30,3 +32,5 @@ class UserResource extends JsonResource
         // return parent::toArray($request);
     }
 }
+
+
