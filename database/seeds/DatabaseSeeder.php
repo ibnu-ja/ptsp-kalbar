@@ -26,6 +26,10 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'petugas']);
         Role::create(['name' => 'operator']);
         Role::create(['name' => 'user']);
+        //basic permission        
+        Permission::create(['name' => 'permohonan']);
+        Permission::create(['name' => 'layanan']);
+
         //permohonan
         Permission::create(['name' => 'view permohonan']);
         Permission::create(['name' => 'add permohonan']);
@@ -42,6 +46,9 @@ class DatabaseSeeder extends Seeder
 
         // tambahkan permission ke role admin
         $role = Role::find(1);
+        $role->givePermissionTo('permohonan'); //untuk tampil navbar permohonan
+        $role->givePermissionTo('layanan'); //untuk tampil navbar layanan
+
         $role->givePermissionTo('disposisi');
 
         $role->givePermissionTo('view permohonan');
@@ -58,6 +65,7 @@ class DatabaseSeeder extends Seeder
 
         // tambah permission ke role pimpinan
         $role = Role::find(2);
+        $role->givePermissionTo('permohonan');
         $role->givePermissionTo('disposisi');        
         $role->givePermissionTo('view permohonan');
         // $role->givePermissionTo('add permohonan');
@@ -66,11 +74,11 @@ class DatabaseSeeder extends Seeder
         // $role->givePermissionTo('edit status permohonan');
 
         // tambah permission ke role operator
-        $role = Role::find(5);
+        $role = Role::find(5);        
+        $role->givePermissionTo('permohonan');
         $role->givePermissionTo('disposisi');        
         $role->givePermissionTo('view permohonan');
         $role->givePermissionTo('add permohonan');
-        $role->givePermissionTo('view permohonan');
         // $role->givePermissionTo('edit permohonan');
         // $role->givePermissionTo('delete permohonan');
         // $role->givePermissionTo('edit status permohonan');
