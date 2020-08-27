@@ -76,11 +76,7 @@
               </v-col>
               <v-col cols="12">
                 <div>Deskripsi</div>
-                <ckeditor
-                  :editor="editor"
-                  v-model="items.deskripsi"
-                  :config="editorConfig"
-                ></ckeditor>
+                <jodit-editor v-model="items.deskripsi" />
               </v-col>
             </v-row>
           </v-card-text>
@@ -108,10 +104,11 @@
 </template>
 
 <script>
+import { Jodit } from 'jodit'
+import 'jodit/build/jodit.min.css'
 import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
 import * as rules from "vee-validate/dist/rules";
 import { messages } from "vee-validate/dist/locale/id.json";
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 Object.keys(rules).forEach(rule => {
   extend(rule, {
@@ -135,14 +132,14 @@ export default {
         subkategori: "",
         deskripsi: "",
       },
+      editor: null,
       dialog: true,
       errorMsg: {},
       subkategori: [
         { text: 'Layanan Barang Publik', value: 0 },
         { text: 'Layanan Jasa Publik', value: 1 },
-        { text: 'Layanan Administrasi', value: 3 },
+        { text: 'Layanan Administrasi', value: 2 },
       ],
-      editor: ClassicEditor,
       kategori: [],
       alert: false,
     };
@@ -173,7 +170,7 @@ export default {
         self.errorMsg = { Validation: "Data tidak valid!" }
       }
       let payload = {
-        name: "",
+        name: self.items.name,
         kategori: self.items.kategori,
         subkategori: self.items.subkategori,
         deskripsi: self.items.deskripsi,
