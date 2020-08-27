@@ -13,7 +13,9 @@ class TampilLayananController extends Controller
         $layanans = Layanan::where([
             ['kategori', 'like', $request->kategori],
             ['subkategori', '=', $request->subkategori]
-        ])->get();
+        ])
+            ->orWhere('kategori', 'like', $request->kategori)
+            ->get();
         return new LayananResource($layanans);
     }
 
