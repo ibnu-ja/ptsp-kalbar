@@ -79,7 +79,10 @@ class PermohonanController extends ApiController
      */
     public function show($id)
     {
-        $permohonan = Permohonan::find($id)->first();
+        $permohonan = Permohonan::find($id);
+        if(empty($permohonan)) {
+            return response()->json(['data'=>[]], 200);
+        }
         return new PermohonanResource($permohonan);
     }
 
@@ -107,7 +110,7 @@ class PermohonanController extends ApiController
 
 
 
-        return new PermohonanResource($permohonan);
+        return PermohonanResource::collection($permohonan);
     }
 
     /**
