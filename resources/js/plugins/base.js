@@ -1,5 +1,5 @@
 // Automatically loads and bootstraps files
-// in the "./src/components/base" folder.
+// in the "resources/js/components/base" folder.
 
 // Imports
 import Vue from 'vue'
