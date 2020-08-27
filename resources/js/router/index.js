@@ -70,26 +70,6 @@ const router = new Router({
             // },
         },
         {
-            path: '/contact-us',
-            name: 'Contact',
-            component: () => import('@/pages/Web/contact-us/Index.vue'),
-            meta: {
-                src: require('@/assets/contact.jpg'),
-                layout: 'web',
-                auth: undefined
-            },
-        },
-        {
-            path: '/pro',
-            name: 'Pro',
-            component: () => import('@/pages/Web/pro/Index.vue'),
-            meta: {
-                src: require('@/assets/pro.jpg'),
-                layout: 'web',
-                auth: undefined
-            },
-        },
-        {
             path: '/register',
             name: 'register',
             component: () => import('@/pages/Register.vue'),
@@ -140,6 +120,16 @@ const router = new Router({
                             path: 'list',
                             name: 'dashboard.permohonan.list',
                             component: () => import('@/pages/Dashboard/permohonan/List.vue'),
+                            meta: {
+                                layout: 'admin',
+                                auth: true,
+                                breadCrumb: 'List'
+                            }
+                        },
+                        {                           
+                            path: 'tambah',
+                            name: 'dashboard.permohonan.tambah',
+                            component: () => import('@/pages/Dashboard/permohonan/FormAdd.vue'),
                             meta: {
                                 layout: 'admin',
                                 auth: true,
