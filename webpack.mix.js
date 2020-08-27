@@ -20,9 +20,9 @@ mix
         '@components': '/resources/js/components',
     })
     // https://ptsp-kalbar.test:3000
-    .browserSync({
-        proxy: 'ptsp-kalbar.test'
-    })
+    // .browserSync({
+    //     proxy: 'ptsp-kalbar.test'
+    // })
     .js('resources/js/app.js', 'public/js')
     .vuetify('vuetify-loader')
     .sass('resources/sass/app.scss', 'public/css')
