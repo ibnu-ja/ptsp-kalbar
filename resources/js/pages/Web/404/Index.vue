@@ -16,7 +16,6 @@
       LoadSections([
         '404',
         'newsletter',
-        'info-alt',
       ]),
     ],
 
