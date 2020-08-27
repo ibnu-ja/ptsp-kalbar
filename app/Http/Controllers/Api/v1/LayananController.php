@@ -42,20 +42,6 @@ class LayananController extends ApiController
 
         $layanan = Layanan::create($request->all());
 
-        // $Layanan->addMultipleMediaFromRequest(['berkas'])
-        //     ->each(function ($fileAdder, $key) use ($request) {
-        //         $fileAdder
-        //             ->withCustomProperties([
-        //                 'surat' => [
-        //                     'nomor' => $request->nomor_berkas[$key],
-        //                     'asal' => $request->asal[$key],
-        //                     'perihal' => $request->perihal[$key],
-        //                     'tgl_berkas' => $request->tgl_berkas[$key],
-        //                 ]
-        //             ])
-        //             ->toMediaCollection();
-        //     });
-        // return response()->json(['data' => $Layanan]);
         return new LayananResource($layanan);
     }
     /**
@@ -66,8 +52,11 @@ class LayananController extends ApiController
      */
     public function show($id)
     {
-        $Layanan = Layanan::find($id)->first();
-        return new LayananResource($Layanan);
+        $layanan = Layanan::find($id);
+        if(empty($layanan)) {
+            return response()->json(['data'=>[]], 200);
+        }
+        return new LayananResource($layanan);
     }
 
     /**
@@ -94,7 +83,7 @@ class LayananController extends ApiController
 
 
 
-        return new LayananResource($Layanan);
+        return LayananResource::collection($Layanan);
     }
 
     /**
