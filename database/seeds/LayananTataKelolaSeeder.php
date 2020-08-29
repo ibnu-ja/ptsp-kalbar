@@ -18,7 +18,7 @@ class LayananTataKelolaSeeder extends Seeder
             'kategori' => 'Pelayanan Bidang Tata Kelola',
             'tingkat_layanan' => 'Pusat,Kanwil',
             'subkategori' => '1',
-            'deskripsi' => "<p>Deskripsi: Pelayanan&nbsp;pendaftaran&nbsp;pengadaan&nbsp;barang&nbsp;dan&nbsp;jasa&nbsp;melalui&nbsp;Unit&nbsp;Kerja&nbsp;Pengadaan&nbsp;Barang&nbsp;dan&nbsp;Jasa</p>
+            'deskripsi' => "<p>Deskripsi: Pelayanan pendaftaran pengadaan barang dan jasa melalui Unit Kerja Pengadaan Barang dan Jasa</p>
             <p>Syarat:</p>
             <ol>
               <li>Mengajukan surat permohonan dari instansi, organiasi dan Lembaga</li>
@@ -36,7 +36,7 @@ class LayananTataKelolaSeeder extends Seeder
             'kategori' => 'Pelayanan Bidang Tata Kelola',
             'tingkat_layanan' => 'Pusat,Kanwil',
             'subkategori' => '1',
-            'deskripsi' => "<p>Deskripsi: Pelayanan&nbsp;penyaluran&nbsp;bantuan&nbsp;operasional&nbsp;kepada&nbsp;Forum&nbsp;Kerukunan&nbsp;Umat&nbsp;Beragama&nbsp;(FKUB)</p>
+            'deskripsi' => "<p>Deskripsi: Pelayanan penyaluran bantuan operasional kepada Forum Kerukunan Umat Beragama (FKUB)</p>
             <p>Syarat:</p>
             <ol>
               <li>FKUB mengajukan proposal yang memuat :
