@@ -21,7 +21,7 @@ class PermohonanController extends ApiController
      */
     public function index()
     {
-        return PermohonanResource::collection(Permohonan::get());
+        return PermohonanResource::collection(Permohonan::with('layanan')->get());
     }
     // public function medialibrary($id)
     // {
@@ -79,7 +79,7 @@ class PermohonanController extends ApiController
      */
     public function show($id)
     {
-        $permohonan = Permohonan::find($id);
+        $permohonan = Permohonan::with('layanan')->find($id);
         if(empty($permohonan)) {
             return response()->json(['data'=>[]], 200);
         }
