@@ -20,7 +20,7 @@ class LayananController extends ApiController
      */
     public function index()
     {
-        return LayananResource::collection(Layanan::get());
+        return LayananResource::collection(Layanan::with('permohonan')->get());
     }
     /**
      * Store a newly created resource in storage.
@@ -52,7 +52,7 @@ class LayananController extends ApiController
      */
     public function show($id)
     {
-        $layanan = Layanan::find($id);
+        $layanan = Layanan::with('permohonan')->find($id);
         if(empty($layanan)) {
             return response()->json(['data'=>[]], 200);
         }
@@ -92,12 +92,13 @@ class LayananController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Layanan $Layanan)
+    public function destroy(Request $request, Layanan $layanan)
     {
         // if ($request->user()->id != $book->user_id) {
         //     return response()->json(['error' => 'You can only delete your own books.'], 403);
         // }
-        $Layanan->delete();
+        $layanan->delete();
+        // return $layanan;
         return response()->json(null, 204);
     }
 }
