@@ -1,17 +1,33 @@
 <template>
   <div>
-    <div>
-      <v-alert
-        type="error"
-        v-model="alert"
-        dismissible
-        v-for="(errors, i) in errorMsg"
-        :key="i"
-      >{{i}}<ul>
-          <li v-for="(error, j) in errors">{{error}}</li>
-        </ul>
-      </v-alert>
-    </div>
+    <v-snackbar
+      v-model="snackbar"
+      timeout="3000"
+      color="success"
+      top
+    >
+      {{ snackbarMsg }}
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="pink"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+    <v-alert
+      type="error"
+      v-model="alert"
+      dismissible
+      v-for="(errors, i) in errorMsg"
+      :key="i"
+    >{{i}}<ul>
+        <li v-for="(error, j) in errors">{{error}}</li>
+      </ul>
+    </v-alert>
     <v-card>
       <v-card-title>
         Tambah Layanan
@@ -142,6 +158,8 @@ export default {
       ],
       kategori: [],
       alert: false,
+      snackbar: false,
+      snackbarMsg: null,
     };
   },
   mounted () {
@@ -175,9 +193,11 @@ export default {
         subkategori: self.items.subkategori,
         deskripsi: self.items.deskripsi,
       }
-      axios.post('/api/layanan', payload)
+      axios.post('/api/v1/layanan', payload)
         .then(function (response) {
           self.$store.commit('hideLoader');
+          self.snackbarMsg = "Sukses!"
+          self.snackbar= true;
           // reset the values ...
           self.clear();
         })
