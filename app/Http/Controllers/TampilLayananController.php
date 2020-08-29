@@ -16,7 +16,7 @@ class TampilLayananController extends Controller
         ])
             ->orWhere('kategori', 'like', $request->kategori)
             ->get();
-        return new LayananResource($layanans);
+        return LayananResource::collection($layanans);
     }
 
     public function kategori()
