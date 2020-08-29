@@ -47,6 +47,7 @@
                   v-model="kategori"
                   :items="kategoris"
                   label="Bidang Layanan"
+                  clearable
                 ></v-autocomplete>
               </v-col>
               <v-col
@@ -59,6 +60,7 @@
                   item-text="name"
                   item-value="id"
                   label="Layanan"
+                  clearable
                 ></v-autocomplete>
               </v-col>
             </v-row>
