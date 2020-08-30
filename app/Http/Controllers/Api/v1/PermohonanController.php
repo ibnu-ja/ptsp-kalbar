@@ -19,9 +19,14 @@ class PermohonanController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return PermohonanResource::collection(Permohonan::with('layanan')->get());
+        $permohonan = Permohonan::with('layanan')
+            ->when($request->layanan_id, function ($query) use ($request) {
+                $query->where('layanan_id', '=', $request->layanan_id);
+            })
+            ->get();
+        return PermohonanResource::collection($permohonan);
     }
     // public function medialibrary($id)
     // {
@@ -36,7 +41,7 @@ class PermohonanController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, Layanan $layanan)
     {
         $validation = validator($request->all(), [
             'keterangan' => 'required',
@@ -48,26 +53,28 @@ class PermohonanController extends ApiController
             return response()->json($validation->errors(), 400);
         }
 
-        $permohonan = Layanan::find($id)->permohonan()->create([
+        $permohonan = $layanan->permohonan()->create([
             'user_id' => auth()->user()->id,
             'no_surat_masuk' => $request->no_surat_masuk,
             'keterangan' => $request->keterangan,
             'pemohon' => $request->pemohon,
         ]);
 
-        $permohonan->addMultipleMediaFromRequest(['berkas'])
-            ->each(function ($fileAdder, $key) use ($request) {
-                $fileAdder
-                    ->withCustomProperties([
-                        'surat' => [
-                            'nomor' => $request->nomor_berkas[$key],
-                            'asal' => $request->asal[$key],
-                            'perihal' => $request->perihal[$key],
-                            'tgl_berkas' => $request->tgl_berkas[$key],
-                        ]
-                    ])
-                    ->toMediaCollection();
-            });
+        if ($request->berkas) {
+            $permohonan->addMultipleMediaFromRequest(['berkas'])
+                ->each(function ($fileAdder, $key) use ($request) {
+                    $fileAdder
+                        ->withCustomProperties([
+                            'surat' => [
+                                'nomor' => $request->nomor_berkas[$key],
+                                'asal' => $request->asal[$key],
+                                'perihal' => $request->perihal[$key],
+                                'tgl_berkas' => $request->tgl_berkas[$key],
+                            ]
+                        ])
+                        ->toMediaCollection();
+                });
+        }
         // return response()->json(['data' => $permohonan]);
         return new PermohonanResource($permohonan);
     }
@@ -77,11 +84,10 @@ class PermohonanController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Permohonan $permohonan)
     {
-        $permohonan = Permohonan::with('layanan')->find($id);
-        if(empty($permohonan)) {
-            return response()->json(['data'=>[]], 200);
+        if (empty($permohonan)) {
+            return response()->json(['data' => []], 200);
         }
         return new PermohonanResource($permohonan);
     }

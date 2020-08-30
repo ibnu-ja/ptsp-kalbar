@@ -50,9 +50,8 @@ class LayananController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Layanan $layanan)
     {
-        $layanan = Layanan::with('permohonan')->find($id);
         if(empty($layanan)) {
             return response()->json(['data'=>[]], 200);
         }
