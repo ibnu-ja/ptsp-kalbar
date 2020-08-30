@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
 /*
@@ -33,18 +34,23 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
         });
 
         Route::group(['middleware' => ['permission:view permohonan']], function () {
+            Route::get('unduh-berkas/{mediaItem}', function(Media $mediaItem){
+                return response()->download($mediaItem->getPath(), $mediaItem->file_name);
+            });
             Route::get('layanan/permohonan', 'PermohonanController@index');
-            Route::get('layanan/permohonan/{id}', 'PermohonanController@show');
+            Route::get('layanan/permohonan/{permohonan}', 'PermohonanController@show');
         });
 
-        Route::post('layanan/{id}/permohonan', 'PermohonanController@store')->middleware(['permission:add permohonan']);
+        Route::post('layanan/{layanan}/permohonan', 'PermohonanController@store')->middleware(['permission:add permohonan']);
 
         Route::group(['middleware' => ['permission:view layanan']], function () {
             Route::get('layanan', 'LayananController@index');
             Route::post('layanan', 'LayananController@store');
         });
-
-        Route::get('layanan/{id}', 'LayananController@show')->middleware(['permission:sho permohonan']);
+        
+        Route::get('layanan/{layanan}', 'LayananController@show')->middleware(['permission:view layanan']);
+        Route::delete('layanan/{layanan}', 'LayananController@destroy')->middleware(['permission:delete layanan']);
+        
     });
 });
 
