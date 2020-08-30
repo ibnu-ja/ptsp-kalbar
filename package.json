@@ -36,6 +36,7 @@
         "form-data": "^3.0.0",
         "jodit": "^3.4.23",
         "jodit-vue": "^2.2.1",
+        "js-file-download": "^0.4.12",
         "laravel-mix-alias": "^1.0.2",
         "moment": "^2.27.0",
         "vee-validate": "^3.3.8",
