@@ -25,6 +25,7 @@ class UserResource extends JsonResource
             "nip"=> $this->nip,
             "email"=> $this->email,
             //really laravel?
+            "jabatan"=> $this->when($this->jabatan, $this->jabatan),
             "kode_jabatan"=> $this->when($this->kode_jabatan, $this->kode_jabatan),
             "roles" => ["role" => $this->getRoleNames(), "permissions" => $permissions],
             "email_verified_at"=> $this->email_verified_at,
