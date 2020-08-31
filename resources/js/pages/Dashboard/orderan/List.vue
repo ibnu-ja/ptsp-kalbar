@@ -86,15 +86,18 @@
               :key="item.id"
             >
               <td>
-                <v-row no-gutters>
+                <v-row
+                  no-gutters
+                  justify="center"
+                >
                   <template v-if="$auth.check({role: ['admin']})">
                     <v-col>
                       <v-btn
                         icon
                         small
                         color="primary"
+                        @click="$router.push({ name:'dashboard.orderan.edit', params: { id: item.id }})"
                       >
-
                         <v-icon>mdi-pencil</v-icon>
                       </v-btn>
                     </v-col>
@@ -109,19 +112,46 @@
                       </v-btn>
                     </v-col>
                   </template>
-                  <v-col>
-                    <v-btn
-                      text
-                      small
-                      color="primary"
-                      @click="konfirmasi(item)"
-                    >
-                      verifikasi
-                    </v-btn>
-                  </v-col>
+                  <template v-else><template v-if="$auth.check({role: ['operator']})">
+                      <v-col>
+                        <v-btn
+                          text
+                          small
+                          color="primary"
+                          @click="verifikasi(item)"
+                        >
+                          verifikasi
+                        </v-btn>
+                      </v-col>
+                    </template>
+                    <template v-if="$auth.check({role: ['pejabat', 'pimpinan']})">
+                      <v-col>
+                        <v-btn
+                          text
+                          small
+                          color="primary"
+                          @click="disposisiMenu(item)"
+                        >
+                          disposisi
+                        </v-btn>
+                      </v-col>
+                    </template>
+                    <template v-if="$auth.check({permissions: ['edit status orderan']})">
+                      <v-col>
+                        <v-btn
+                          text
+                          small
+                          color="primary"
+                          @click="selesai(item)"
+                        >
+                          selesaikan
+                        </v-btn>
+                      </v-col>
+                    </template></template>
                 </v-row>
               </td>
               <td>{{item.pemohon}}</td>
+              <td>{{item.keterangan}}</td>
               <td>{{item.layanan.kategori}}</td>
               <td>{{item.layanan.name}}</td>
               <td>
@@ -141,7 +171,7 @@
       </v-data-table>
       <!-- <v-card-text v-else><div >Tolon</div></v-card-text> -->
     </v-card>
-
+    <!-- dialog berkas -->
     <v-dialog
       v-model="dialogBerkas"
       max-width="900"
@@ -191,6 +221,68 @@
     </v-dialog>
 
     <v-dialog
+      v-model="dialogDisposisi"
+      persistent
+      max-width="600"
+    >
+      <v-card>
+        <ValidationObserver
+          v-slot="{validate,reset,invalid}"
+          ref="observer"
+        >
+          <v-form lazy-validation>
+            <v-card-title class="headline">Disposisi Orderan</v-card-title>
+            <v-card-text>
+              <v-row no-gutters>
+                <v-col cols="12">
+                  <ValidationProvider
+                    v-slot="{ errors }"
+                    name="Satker"
+                    rules="required"
+                  >
+                    <v-autocomplete
+                      v-model="satker"
+                      :error-messages="errors"
+                      :items="satkers"
+                      item-text="jabatan"
+                      item-value="kode_jabatan"
+                      label="Satker"
+                      clearable
+                    ></v-autocomplete>
+                  </ValidationProvider>
+                  <ValidationProvider
+                    v-slot="{ errors }"
+                    name="Keterangan"
+                    rules=""
+                  >
+                    <v-textarea
+                      :error-messages="errors"
+                      label="Keterangan"
+                      v-model="keterangan"
+                    ></v-textarea>
+                  </ValidationProvider>
+                </v-col>
+              </v-row>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="green darken-1"
+                text
+                @click="dialogDisposisi = false"
+              >Batal</v-btn>
+              <v-btn
+                color="green darken-1"
+                text
+                :disabled="invalid"
+                @click="disposisi(selectedItem)"
+              >OK</v-btn>
+            </v-card-actions>
+          </v-form>
+        </ValidationObserver>
+      </v-card>
+    </v-dialog>
+    <v-dialog
       v-model="dialogDelete"
       persistent
       max-width="400"
@@ -217,6 +309,18 @@
 </template>
 
 <script>
+import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
+import * as rules from "vee-validate/dist/rules";
+import { messages } from "vee-validate/dist/locale/id.json";
+
+
+Object.keys(rules).forEach(rule => {
+  extend(rule, {
+    ...rules[rule], // copies rule configuration
+    message: messages[rule] // assign message
+  });
+});
+
 import fileDownload from 'js-file-download'
 export default {
   data () {
@@ -236,6 +340,10 @@ export default {
       kategori: null,
       layanan: null,
       berkas: null,
+      dialogDisposisi: null,
+      keterangan: null,
+      satker: null,
+      satkers: [],
       berkasHeaders: [
         {
           text: 'Unduh',
@@ -253,6 +361,10 @@ export default {
         { text: 'Ukuran', value: 'size' },
       ],
     }
+  },
+  components: {
+    ValidationProvider,
+    ValidationObserver
   },
   watch: {
     kategori (newVal) {
@@ -289,10 +401,11 @@ export default {
       return [
         { text: 'Aksi', value: 'name', width: '100', align: 'center' },
         { text: 'Pemohon', value: 'pemohon' },
+        { text: 'Keterangan', value: 'keterangan' },
         // { text: 'Kategori', value: 'pemohon' },
         // { text: 'Pemohon', value: 'pemohon' },
         {
-          text: 'Kategori', value: 'layanan.kategori',
+          text: 'Kategori', value: 'layanan.kategori', align: 'd-none',
           filter: value => {
             if (!this.kategori) return true
             return value == this.kategori
@@ -312,6 +425,46 @@ export default {
     },
   },
   methods: {
+    selesai (item) {
+      var self = this
+      axios.get('/api/v1/orderan/' + item.id + '/selesai')
+        .then(function (response) {
+          self.tampilData()
+          self.snackbarMsg = "Sukses!"
+          self.snackbar = true;
+        })
+        .catch(function (e) {
+          console.log(e)
+        })
+      // self.selectedItem = item.id
+      // this.disposisi(item.id)
+    },
+    disposisiMenu (item) {
+      var self = this;
+      self.selectedItem = item.id
+      self.dialogDisposisi = true
+      axios.get('/api/v1/jabatan')
+        .then(function (response) {
+          self.satkers = response.data.data
+          // self.snackbarMsg = "Sukses verifikasi!"
+          // self.snackbar = true;
+        })
+        .catch(function (e) {
+          console.log(e)
+        })
+    },
+    verifikasi (item) {
+      var self = this;
+      axios.get('/api/v1/orderan/' + item.id + '/verifikasi')
+        .then(function () {
+          self.snackbarMsg = "Sukses verifikasi!"
+          self.snackbar = true;
+          self.tampilData();
+        })
+        .catch(function (e) {
+          console.log(e)
+        })
+    },
     formatBytes (bytes, decimals = 2) {
       if (bytes === 0) return '0 Bytes';
 
@@ -360,6 +513,23 @@ export default {
       console.log(self.dialogDeskripsi);
       this.deskripsi = item.deskripsi;
     },
+    disposisi (id) {
+      var self = this;
+      let payload = {
+        tujuan: self.satker,
+        keterangan: self.keterangan
+      }
+      axios.post('/api/v1/orderan/' + id + '/disposisi', payload)
+        .then(function (response) {
+          self.tampilData()
+          self.dialogDisposisi = false
+          self.snackbarMsg = "Sukses!"
+          self.snackbar = true;
+        })
+        .catch(function (e) {
+          console.log(e)
+        })
+    },
     deleteData (id) {
       var self = this;
       axios.delete('/api/v1/layanan/' + id)
@@ -371,7 +541,6 @@ export default {
         })
         .catch(function (e) {
           console.log(e)
-          self.dialogDelete = false
         })
     },
     filterKategori (value, search, item) {
