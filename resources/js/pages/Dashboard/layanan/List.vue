@@ -74,6 +74,7 @@
                   icon
                   small
                   color="primary"
+                  @click="$router.push({ name:'dashboard.layanan.edit', params: { id: item.id }})"
                 >
                   <v-icon>mdi-pencil</v-icon>
                 </v-btn>
