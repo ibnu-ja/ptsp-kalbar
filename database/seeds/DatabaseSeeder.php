@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -14,28 +15,30 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersTableSeeder::class);
+        $this->call(SuratMasukSeeder::class);
         // $this->call(LayananTataKelolaSeeder::class);
         // $this->call(LayananAgamaSeeder::class);
         // $this->call(LayananPendidikanSeeder::class);
         // $this->call(LayananHajiUmrahSeeder::class);
         // $this->call(LayananSertifikasiHalal::class);
         // buat role
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'pimpinan']);
-        Role::create(['name' => 'pejabat']);
-        Role::create(['name' => 'petugas']);
+        Role::create(['name' => 'admin']); //id 1
+        Role::create(['name' => 'pimpinan']); //id 2
+        Role::create(['name' => 'pejabat']); //3
+        Role::create(['name' => 'petugas']); //4
         Role::create(['name' => 'operator']);
+        Role::create(['name' => 'pegawai']);
         Role::create(['name' => 'user']);
         //basic permission        
-        Permission::create(['name' => 'permohonan']);
+        Permission::create(['name' => 'orderan']);
         Permission::create(['name' => 'layanan']);
 
-        //permohonan
-        Permission::create(['name' => 'view permohonan']);
-        Permission::create(['name' => 'add permohonan']);
-        Permission::create(['name' => 'edit permohonan']);
-        Permission::create(['name' => 'delete permohonan']);
-        Permission::create(['name' => 'edit status permohonan']);
+        //orderan
+        Permission::create(['name' => 'view orderan']);
+        Permission::create(['name' => 'add orderan']);
+        Permission::create(['name' => 'edit orderan']);
+        Permission::create(['name' => 'delete orderan']);
+        Permission::create(['name' => 'edit status orderan']);
         //layanan
         Permission::create(['name' => 'view layanan']);
         Permission::create(['name' => 'add layanan']);
@@ -46,42 +49,69 @@ class DatabaseSeeder extends Seeder
 
         // tambahkan permission ke role admin
         $role = Role::find(1);
-        $role->givePermissionTo('permohonan'); //untuk tampil navbar permohonan
+        $role->givePermissionTo('orderan'); //untuk tampil navbar orderan
         $role->givePermissionTo('layanan'); //untuk tampil navbar layanan
 
         $role->givePermissionTo('disposisi');
 
-        $role->givePermissionTo('view permohonan');
-        $role->givePermissionTo('add permohonan');
-        $role->givePermissionTo('edit permohonan');
-        $role->givePermissionTo('delete permohonan');
+        $role->givePermissionTo('view orderan');
+        $role->givePermissionTo('add orderan');
+        $role->givePermissionTo('edit orderan');
+        $role->givePermissionTo('delete orderan');
 
         $role->givePermissionTo('view layanan');
         $role->givePermissionTo('add layanan');
         $role->givePermissionTo('edit layanan');
         $role->givePermissionTo('delete layanan');
 
-        $role->givePermissionTo('edit status permohonan');
+        $role->givePermissionTo('edit status orderan');
 
         // tambah permission ke role pimpinan
         $role = Role::find(2);
-        $role->givePermissionTo('permohonan');
+        $role->givePermissionTo('orderan');
         $role->givePermissionTo('disposisi');        
-        $role->givePermissionTo('view permohonan');
-        // $role->givePermissionTo('add permohonan');
-        // $role->givePermissionTo('edit permohonan');
-        // $role->givePermissionTo('delete permohonan');
-        // $role->givePermissionTo('edit status permohonan');
+        $role->givePermissionTo('view orderan');
+        // $role->givePermissionTo('add orderan');
+        // $role->givePermissionTo('edit orderan');
+        // $role->givePermissionTo('delete orderan');
+        // $role->givePermissionTo('edit status orderan');
+
+        // tambah permission ke role pejabat
+        $role = Role::find(3);        
+        $role->givePermissionTo('orderan');
+        $role->givePermissionTo('disposisi');        
+        $role->givePermissionTo('view orderan');
+        $role->givePermissionTo('add orderan');
+        // $role->givePermissionTo('edit orderan');
+        // $role->givePermissionTo('delete orderan');
+        $role->givePermissionTo('edit status orderan');
+
+        // tambah permission ke role petugas
+        $role = Role::find(4);
+        $role->givePermissionTo('orderan');  
+        $role->givePermissionTo('view orderan');
+        $role->givePermissionTo('add orderan');
+        // $role->givePermissionTo('edit orderan');
+        // $role->givePermissionTo('delete orderan');
+        $role->givePermissionTo('edit status orderan');
 
         // tambah permission ke role operator
         $role = Role::find(5);        
-        $role->givePermissionTo('permohonan');
-        $role->givePermissionTo('disposisi');        
-        $role->givePermissionTo('view permohonan');
-        $role->givePermissionTo('add permohonan');
-        // $role->givePermissionTo('edit permohonan');
-        // $role->givePermissionTo('delete permohonan');
-        // $role->givePermissionTo('edit status permohonan');
+        $role->givePermissionTo('orderan');   
+        $role->givePermissionTo('view orderan');
+        $role->givePermissionTo('add orderan');
+        // $role->givePermissionTo('edit orderan');
+        // $role->givePermissionTo('delete orderan');
+        $role->givePermissionTo('edit status orderan');
+        
+        $user = User::find(1);
+        $user->syncRoles(['admin']);
+        $user = User::find(2);
+        $user->syncRoles(['pimpinan', 'pegawai']);
+        $user = User::find(3);
+        $user->syncRoles(['pejabat', 'pegawai']);
+        $user = User::find(4);
+        $user->syncRoles(['petugas', 'pegawai']);
 
     }
 }
