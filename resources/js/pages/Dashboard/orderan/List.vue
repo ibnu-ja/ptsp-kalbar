@@ -86,21 +86,40 @@
               :key="item.id"
             >
               <td>
-                <v-btn
-                  icon
-                  small
-                  color="primary"
-                >
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-                <v-btn
-                  icon
-                  small
-                  color="red"
-                  @click="konfirmasi(item)"
-                >
-                  <v-icon>mdi-delete</v-icon>
-                </v-btn>
+                <v-row no-gutters>
+                  <template v-if="$auth.check({role: ['admin']})">
+                    <v-col>
+                      <v-btn
+                        icon
+                        small
+                        color="primary"
+                      >
+
+                        <v-icon>mdi-pencil</v-icon>
+                      </v-btn>
+                    </v-col>
+                    <v-col>
+                      <v-btn
+                        icon
+                        small
+                        color="red"
+                        @click="konfirmasi(item)"
+                      >
+                        <v-icon>mdi-delete</v-icon>
+                      </v-btn>
+                    </v-col>
+                  </template>
+                  <v-col>
+                    <v-btn
+                      text
+                      small
+                      color="primary"
+                      @click="konfirmasi(item)"
+                    >
+                      verifikasi
+                    </v-btn>
+                  </v-col>
+                </v-row>
               </td>
               <td>{{item.pemohon}}</td>
               <td>{{item.layanan.kategori}}</td>
@@ -310,7 +329,7 @@ export default {
     tampilData () {
       var self = this;
       self.dataLoading = true
-      axios.get('/api/v1/layanan/permohonan')
+      axios.get('/api/v1/layanan/orderan')
         .then(function (response) {
           // console.log(response.data.data)
           self.items = response.data.data
