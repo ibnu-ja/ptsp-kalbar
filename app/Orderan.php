@@ -12,7 +12,7 @@ class Orderan extends Model implements HasMedia
 {
     use InteractsWithMedia, HasStatuses;
 
-    protected $fillable = ['user_id', 'keterangan', 'pemohon'];
+    protected $fillable = ['user_id', 'keterangan', 'pemohon', 'layanan_id'];
 
     public function layanan()
     {
