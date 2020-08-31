@@ -128,12 +128,31 @@ class OrderanController extends ApiController
         return new OrderanResource($orderan);
     }
     /**
-     * Display the specified resource.
+     * Update the specified resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
+    public function tambahBerkas(Request $request, Orderan $orderan)
+    {
+        if ($request->berkas) {
+            $orderan->addMultipleMediaFromRequest(['berkas'])
+                ->each(function ($fileAdder, $key) use ($request) {
+                    $fileAdder
+                        ->withCustomProperties([
+                            'surat' => [
+                                'nomor' => $request->nomor_berkas[$key],
+                                'asal' => $request->asal[$key],
+                                'perihal' => $request->perihal[$key],
+                                'tgl_berkas' => $request->tgl_berkas[$key],
+                            ]
+                        ])
+                        ->toMediaCollection();
+                });
+        }
+        return new OrderanResource($orderan);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -141,24 +160,10 @@ class OrderanController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Orderan $orderan)
-
+    public function update(Request $request, $layanan, Orderan $orderan)
     {
-
-        // check if currently authenticated user is the owner of the book
-
-        // if ($request->user()->id !== $book->user_id) {
-
-        //     return response()->json(['error' => 'You can only edit your own books.'], 403);
-        // }
-
-
-
         $orderan->update($request->all());
-
-
-
-        return OrderanResource::collection($orderan);
+        return new OrderanResource($orderan);
     }
 
     /**
@@ -167,12 +172,15 @@ class OrderanController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Orderan $orderan)
+    public function destroy(Orderan $orderan)
     {
-        // if ($request->user()->id != $book->user_id) {
-        //     return response()->json(['error' => 'You can only delete your own books.'], 403);
-        // }
         $orderan->delete();
+        return response()->json(null, 204);
+    }
+    public function deleteMedia(Orderan $orderan, $index)
+    {
+        $media = $orderan->getMedia();
+        $media[$index]->delete();
         return response()->json(null, 204);
     }
 }
