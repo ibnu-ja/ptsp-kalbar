@@ -38,6 +38,11 @@ class AuthController extends ApiController
     }
     public function logout()
     {
+        // if (!$user = auth()->setRequest($request)->user()) {
+        //     return $this->responseUnauthorized();
+        // }
+        // auth()->logout();
+        // return $this->responseSuccess('Successfully logged out.');
         $this->guard()->logout();
         return response()->json([
             'status' => 'success',
