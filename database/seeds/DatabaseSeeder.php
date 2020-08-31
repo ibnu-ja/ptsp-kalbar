@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
         //basic permission        
         Permission::create(['name' => 'orderan']);
         Permission::create(['name' => 'layanan']);
+        //ide yang buruk menghilangkan permission disposisi
+        Permission::create(['name' => 'disposisi']);
 
         //orderan
         Permission::create(['name' => 'view orderan']);
@@ -69,7 +71,7 @@ class DatabaseSeeder extends Seeder
         // $role->givePermissionTo('add orderan');
         // $role->givePermissionTo('edit orderan');
         // $role->givePermissionTo('delete orderan');
-        $role->givePermissionTo('edit status orderan');
+        $role->givePermissionTo('disposisi');
 
         // tambah permission ke role pejabat
         $role = Role::find(3);        
@@ -78,6 +80,7 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('add orderan');
         // $role->givePermissionTo('edit orderan');
         // $role->givePermissionTo('delete orderan');
+        $role->givePermissionTo('disposisi');
         $role->givePermissionTo('edit status orderan');
 
         // tambah permission ke role petugas
