@@ -403,7 +403,7 @@ export default {
         payload.append('berkas[]', self.items.berkas[i])
       }
       console.log(...payload)
-      axios.post('/api/v1/layanan/' + self.layanan + '/permohonan', payload, {
+      axios.post('/api/v1/layanan/' + self.layanan + '/orderan', payload, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
