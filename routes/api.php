@@ -1,5 +1,6 @@
 <?php
 
+use App\Orderan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -33,15 +34,21 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
             return response('', 204);
         });
 
-        Route::group(['middleware' => ['permission:view permohonan']], function () {
+        Route::get('set-status/{orderan}', function (Orderan $orderan) {
+            $orderan->setStatus($orderan);
+        });
+
+        Route::group(['middleware' => ['permission:view orderan']], function () {
             Route::get('unduh-berkas/{mediaItem}', function(Media $mediaItem){
                 return response()->download($mediaItem->getPath(), $mediaItem->file_name);
             });
-            Route::get('layanan/permohonan', 'PermohonanController@index');
-            Route::get('layanan/permohonan/{permohonan}', 'PermohonanController@show');
+            Route::get('layanan/orderan', 'OrderanController@index');
+            Route::get('layanan/orderan/{orderan}', 'OrderanController@show');
         });
 
-        Route::post('layanan/{layanan}/permohonan', 'PermohonanController@store')->middleware(['permission:add permohonan']);
+        Route::post('layanan/{layanan}/orderan', 'OrderanController@store')->middleware(['permission:add orderan']);
+        Route::get('orderan/{orderan}/verifikasi', 'OrderanController@verifikasi')->middleware(['permission:edit status orderan']);
+        Route::post('orderan/{orderan}/disposisi', 'OrderanController@disposisi')->middleware(['permission:disposisi']);
 
         Route::group(['middleware' => ['permission:view layanan']], function () {
             Route::get('layanan', 'LayananController@index');
