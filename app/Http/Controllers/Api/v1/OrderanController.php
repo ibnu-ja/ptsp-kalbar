@@ -51,6 +51,11 @@ class OrderanController extends ApiController
         $orderan->setStatus('Kw.14');
         return new OrderanResource($orderan);
     }
+    public function selesai(Orderan $orderan)
+    {
+        $orderan->setStatus('selesai');
+        return new OrderanResource($orderan);
+    }
     public function disposisi(Request $request, Orderan $orderan)
     {
         $validation = validator(
