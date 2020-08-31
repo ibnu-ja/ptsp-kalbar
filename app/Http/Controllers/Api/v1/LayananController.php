@@ -52,8 +52,8 @@ class LayananController extends ApiController
      */
     public function show(Layanan $layanan)
     {
-        if(empty($layanan)) {
-            return response()->json(['data'=>[]], 200);
+        if (empty($layanan)) {
+            return response()->json(null, 204);
         }
         return new LayananResource($layanan);
     }
@@ -65,24 +65,10 @@ class LayananController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Layanan $Layanan)
-
+    public function update(Request $request, Layanan $layanan)
     {
-
-        // check if currently authenticated user is the owner of the book
-
-        // if ($request->user()->id !== $book->user_id) {
-
-        //     return response()->json(['error' => 'You can only edit your own books.'], 403);
-        // }
-
-
-
-        $Layanan->update($request->all());
-
-
-
-        return LayananResource::collection($Layanan);
+        $layanan->update($request->all());
+        return new LayananResource($layanan);
     }
 
     /**
