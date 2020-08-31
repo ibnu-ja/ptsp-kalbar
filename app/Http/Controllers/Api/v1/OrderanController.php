@@ -45,7 +45,6 @@ class OrderanController extends ApiController
         }
 
         return OrderanResource::collection($orderan->where('user_id', '=', $user->id));
-
     }
     public function verifikasi(Orderan $orderan)
     {
@@ -54,7 +53,16 @@ class OrderanController extends ApiController
     }
     public function disposisi(Request $request, Orderan $orderan)
     {
-        $orderan->setStatus($request->tujuan);
+        $validation = validator(
+            $request->all(),
+            ['tujuan' => 'required']
+        );
+
+        if ($validation->fails()) {
+            return response()->json($validation->errors(), 400);
+        }
+
+        $orderan->setStatus($request->tujuan, $request->keterangan);
         return new OrderanResource($orderan);
     }
     /**
