@@ -55,7 +55,7 @@ const router = new Router({
                 {
                     path: 'daftar',
                     name: 'Daftar orderan',
-                    component: () => import('@/pages/Web/layanan/orderan.vue'),
+                    component: () => import('@/pages/Web/layanan/permohonan.vue'),
                     meta: {
                         auth: true,
                         layout: 'admin',
@@ -109,14 +109,14 @@ const router = new Router({
                 {
                     path: 'orderan',
                     name: 'dashboard.orderan',
-                    meta: { breadCrumb: 'orderan' },
+                    meta: { breadCrumb: 'Orderan' },
                     component: () => import('@/pages/Dashboard/orderan/Index.vue'),
                     children: [
                         {
                             path: '/',
                             redirect: 'list'
                         },
-                        {                           
+                        {
                             path: 'list',
                             name: 'dashboard.orderan.list',
                             component: () => import('@/pages/Dashboard/orderan/List.vue'),
@@ -126,7 +126,7 @@ const router = new Router({
                                 breadCrumb: 'List'
                             }
                         },
-                        {                           
+                        {
                             path: 'tambah',
                             name: 'dashboard.orderan.tambah',
                             component: () => import('@/pages/Dashboard/orderan/FormAdd.vue'),
@@ -136,22 +136,16 @@ const router = new Router({
                                 breadCrumb: 'List'
                             }
                         },
-                        // {
-                        //     path: 'create',
-                        //     name: 'dashboard.anime.list',
-                        //     component: AdminAnimeAdd,
-                        //     meta: {
-                        //         layout: 'admin',
-                        //         auth: true,
-                        //         breadCrumb: 'Create'
-                        //     }
-                        // },
-                        // {
-                        //     path:'edit/:id',
-                        //     name:'anime.edit',
-                        //     component: require('../pages/admin/Anime/components/AnimeLists'),
-                        //     props: (route) => ({propUserId: route.params.id}),
-                        // }
+                        {
+                            path: ':id/edit',
+                            name: 'dashboard.orderan.edit',
+                            component: () => import('@/pages/Dashboard/orderan/FormEdit.vue'),
+                            meta: {
+                                layout: 'admin',
+                                auth: true,
+                                breadCrumb: 'Edit'
+                            }
+                        },
                     ]
                 },
                 {
@@ -184,12 +178,16 @@ const router = new Router({
                                 breadCrumb: 'Tambah'
                             }
                         },
-                        // {
-                        //     path:'edit/:id',
-                        //     name:'anime.edit',
-                        //     component: require('../pages/admin/Anime/components/AnimeLists'),
-                        //     props: (route) => ({propUserId: route.params.id}),
-                        // }
+                        {
+                            path: ':id/edit',
+                            name: 'dashboard.layanan.edit',
+                            component: () => import('@/pages/Dashboard/layanan/FormEdit.vue'),
+                            meta: {
+                                layout: 'admin',
+                                auth: true,
+                                breadCrumb: 'Edit'
+                            }
+                        },
                     ]
                 },
             ]
