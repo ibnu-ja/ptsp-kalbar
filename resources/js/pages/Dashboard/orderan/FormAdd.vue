@@ -12,7 +12,12 @@
         </ul>
       </v-alert>
     </div>
-    <v-snackbar v-model="snackbar" timeout="3000" color="success" top>
+    <v-snackbar
+      v-model="snackbar"
+      timeout="3000"
+      color="success"
+      top
+    >
       {{ snackbarMsg }}
       <template v-slot:action="{ attrs }">
         <v-btn
@@ -187,40 +192,25 @@
                         ></v-text-field>
                       </ValidationProvider>
                       <v-menu
-                        ref="menu"
                         v-model="menu[i]"
                         :close-on-content-click="false"
-                        transition="scale-transition"
-                        offset-y
-                        max-width="290px"
-                        min-width="290px"
+                        max-width="290"
                       >
                         <template v-slot:activator="{ on, attrs }">
-                          <ValidationProvider
-                            v-slot="{ errors }"
-                            name="Tanggal dokumen"
-                            rules="required"
-                          >
-                            <v-text-field
-                              v-model="items.tgl_format[i]"
-                              label="Tanggal dokumen"
-                              hint="DD/MM/YYYY format"
-                              :error-messages="errors"
-                              persistent-hint
-                              :name="Math.random()"
-                              prepend-icon="mdi-calendar"
-                              v-bind="attrs"
-                              @blur="items.tgl_berkas[i] = parseDate(items.tgl_format[i])"
-                              v-on="on"
-                              clearable
-                            >
-                            </v-text-field>
-                          </ValidationProvider>
+                          <v-text-field
+                            :value="tanggalFormat[i]"
+                            clearable
+                            label="Tanggal dokumen"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                            @click:clear="items.tgl_berkas[i] = null"
+                          ></v-text-field>
                         </template>
                         <v-date-picker
+                          locale="id-id"
                           v-model="items.tgl_berkas[i]"
-                          no-title
-                          @input="menu[i] = false"
+                          @change="menu[i] = false"
                         ></v-date-picker>
                       </v-menu>
                       <ValidationProvider
@@ -267,7 +257,6 @@
 
 <script>
 import moment from 'moment'
-import { format, parseISO } from 'date-fns'
 import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
 import * as rules from "vee-validate/dist/rules";
 import { messages } from "vee-validate/dist/locale/id.json";
@@ -295,7 +284,6 @@ export default {
         asal: [],
         perihal: [],
         tgl_berkas: [],
-        tgl_format: [],
       },
       errorMsg: {},
       menu: [false],
@@ -326,10 +314,14 @@ export default {
         });
 
     },
-    'items.tgl_berkas': function (val, oldval) {
-      for (const i in val) {
-        this.items.tgl_format[i] = this.formatDate(this.items.tgl_berkas[i])
-      }
+  },
+  computed: {
+    tanggalFormat () {
+      let tanggal = []
+      this.items.tgl_berkas.forEach(element => {
+        tanggal.push(moment(element).format('dddd, MMMM Do YYYY'))
+      })
+      return tanggal
     },
   },
   mounted () {
@@ -343,25 +335,13 @@ export default {
       });
   },
   methods: {
-    formatDate (date) {
-      if (!date) return null
-
-      const [year, month, day] = date.split('-')
-      return `${day}/${month}/${year}`
-    },
-    parseDate (date) {
-      if (!date) return null
-
-      const [month, day, year] = date.split('/')
-      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
-    },
     tambahBerkas () {
       this.items.asal.push("")
       this.items.perihal.push("")
       // this.items.tgl_berkas.push(new Date().toISOString().substr(0, 10)) //tanggal sekarang
       // this.items.tgl_format.push(this.formatDate(new Date().toISOString().substr(0, 10))) //tanggal sekarang
-      this.items.tgl_berkas.push("")
-      this.items.tgl_format.push("")
+      this.items.tgl_berkas.push(new Date().toISOString().substr(0, 10))
+      // this.items.tgl_berkas.push("")
       this.items.nomor_berkas.push("")
     },
     hapusBerkas (index) {
@@ -370,7 +350,6 @@ export default {
       this.items.nomor_berkas.splice(index, 1)
       this.items.berkas.splice(index, 1)
       this.items.tgl_berkas.splice(index, 1)
-      this.items.tgl_format.splice(index, 1)
     },
     clear () {
       var self = this
@@ -381,7 +360,6 @@ export default {
       self.items.asal = []
       self.items.perihal = []
       self.items.tgl_berkas = []
-      self.items.tgl_format = []
       self.$refs.observer.reset();
     },
     async submit () {
@@ -415,7 +393,7 @@ export default {
           self.layanan = null
           self.kategori = null
           self.snackbarMsg = "Sukses!"
-          self.snackbar= true;
+          self.snackbar = true;
         })
         .catch(function (e) {
           // console.log()
