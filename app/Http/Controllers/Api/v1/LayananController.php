@@ -20,7 +20,7 @@ class LayananController extends ApiController
      */
     public function index()
     {
-        return LayananResource::collection(Layanan::with('permohonan')->get());
+        return LayananResource::collection(Layanan::with('orderan')->get());
     }
     /**
      * Store a newly created resource in storage.

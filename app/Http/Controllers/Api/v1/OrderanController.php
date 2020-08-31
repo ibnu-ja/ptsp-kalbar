@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Resources\PermohonanResource;
+use App\Http\Resources\OrderanResource;
 use App\Layanan;
 use Illuminate\Http\Request;
-use App\Permohonan;
+use App\Orderan;
+use Illuminate\Support\Facades\Auth;
 
-class PermohonanController extends ApiController
+class OrderanController extends ApiController
 {
     public function __construct()
     {
@@ -21,20 +22,41 @@ class PermohonanController extends ApiController
      */
     public function index(Request $request)
     {
-        $permohonan = Permohonan::with('layanan')
+        // $orderan = Orderan::with('layanan')
+        //     ->when($request->layanan_id, function ($query) use ($request) {
+        //         $query->where('layanan_id', '=', $request->layanan_id);
+        //     })
+        //     ->get();
+        // return OrderanResource::collection($orderan);
+        $orderan = Orderan::with('layanan')
             ->when($request->layanan_id, function ($query) use ($request) {
                 $query->where('layanan_id', '=', $request->layanan_id);
-            })
-            ->get();
-        return PermohonanResource::collection($permohonan);
-    }
-    // public function medialibrary($id)
-    // {
-    //     // $mediaItems = $permohonan->getMedia();
-    //     $permohonan = Permohonan::find(1)->first();
-    //     return response()->json(['data' => $permohonan->getMedia()]); //returns empty array;
+            });
 
-    // }
+        $user = Auth::user();
+        // return $user->getRoleNames();
+        // return 'asd';
+        if (Auth::user()->hasRole('admin')) {
+            OrderanResource::collection($orderan->get());
+        } else if (Auth::user()->hasRole('operator')) {
+            return OrderanResource::collection($orderan->currentStatus('pending')->get());
+        } else if (Auth::user()->hasRole('pegawai')) {
+            return OrderanResource::collection($orderan->currentStatus($user->kode_jabatan)->get());
+        }
+
+        return OrderanResource::collection($orderan->where('user_id', '=', $user->id));
+        
+    }
+    public function verifikasi(Orderan $orderan)
+    {
+        $orderan->setStatus('Kw.14');
+        return new OrderanResource($orderan);
+    }
+    public function disposisi(Request $request, Orderan $orderan)
+    {
+        $orderan->setStatus($request->tujuan);
+        return new OrderanResource($orderan);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -53,7 +75,7 @@ class PermohonanController extends ApiController
             return response()->json($validation->errors(), 400);
         }
 
-        $permohonan = $layanan->permohonan()->create([
+        $orderan = $layanan->orderan()->create([
             'user_id' => auth()->user()->id,
             'no_surat_masuk' => $request->no_surat_masuk,
             'keterangan' => $request->keterangan,
@@ -61,7 +83,7 @@ class PermohonanController extends ApiController
         ]);
 
         if ($request->berkas) {
-            $permohonan->addMultipleMediaFromRequest(['berkas'])
+            $orderan->addMultipleMediaFromRequest(['berkas'])
                 ->each(function ($fileAdder, $key) use ($request) {
                     $fileAdder
                         ->withCustomProperties([
@@ -75,8 +97,9 @@ class PermohonanController extends ApiController
                         ->toMediaCollection();
                 });
         }
-        // return response()->json(['data' => $permohonan]);
-        return new PermohonanResource($permohonan);
+        $orderan->setStatus('pending');
+        // return response()->json(['data' => $orderan]);
+        return new OrderanResource($orderan);
     }
     /**
      * Display the specified resource.
@@ -84,13 +107,19 @@ class PermohonanController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Permohonan $permohonan)
+    public function show(Orderan $orderan)
     {
-        if (empty($permohonan)) {
+        if (empty($orderan)) {
             return response()->json(['data' => []], 200);
         }
-        return new PermohonanResource($permohonan);
+        return new OrderanResource($orderan);
     }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
 
     /**
      * Update the specified resource in storage.
@@ -99,7 +128,7 @@ class PermohonanController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permohonan $permohonan)
+    public function update(Request $request, Orderan $orderan)
 
     {
 
@@ -112,11 +141,11 @@ class PermohonanController extends ApiController
 
 
 
-        $permohonan->update($request->all());
+        $orderan->update($request->all());
 
 
 
-        return PermohonanResource::collection($permohonan);
+        return OrderanResource::collection($orderan);
     }
 
     /**
@@ -125,12 +154,12 @@ class PermohonanController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Permohonan $permohonan)
+    public function destroy(Request $request, Orderan $orderan)
     {
         // if ($request->user()->id != $book->user_id) {
         //     return response()->json(['error' => 'You can only delete your own books.'], 403);
         // }
-        $permohonan->delete();
+        $orderan->delete();
         return response()->json(null, 204);
     }
 }
