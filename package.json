@@ -31,7 +31,6 @@
     },
     "dependencies": {
         "@websanova/vue-auth": "^3.2.1-beta",
-        "date-fns": "^2.16.0",
         "es6-promise": "^4.2.8",
         "form-data": "^3.0.0",
         "jodit": "^3.4.23",
