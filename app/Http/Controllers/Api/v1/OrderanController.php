@@ -37,7 +37,7 @@ class OrderanController extends ApiController
         // return $user->getRoleNames();
         // return 'asd';
         if (Auth::user()->hasRole('admin')) {
-            OrderanResource::collection($orderan->get());
+            return OrderanResource::collection($orderan->get());
         } else if (Auth::user()->hasRole('operator')) {
             return OrderanResource::collection($orderan->currentStatus('pending')->get());
         } else if (Auth::user()->hasRole('pegawai')) {
@@ -45,7 +45,7 @@ class OrderanController extends ApiController
         }
 
         return OrderanResource::collection($orderan->where('user_id', '=', $user->id));
-        
+
     }
     public function verifikasi(Orderan $orderan)
     {
