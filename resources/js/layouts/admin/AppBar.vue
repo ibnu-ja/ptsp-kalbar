@@ -83,7 +83,7 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Dashboard</v-toolbar-title>
+      <v-toolbar-title>{{$auth.user().name}} <template v-if="$auth.user().jabatan">{{$auth.user().jabatan}}</template></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
         text
@@ -118,8 +118,6 @@ export default {
           children: [
             { icon: 'mdi-format-list-bulleted', text: 'List', link: '/dashboard/orderan/list', permission: 'view orderan' },
             { icon: 'mdi-plus', text: 'Tambah', link: '/dashboard/orderan/tambah', permission: 'add orderan' },
-            { icon: 'mdi-hand-right', text: 'Disposisi', link: '/dashboard/orderan/disposisi', permission: 'disposisi' },
-            { icon: 'mdi-list-status', text: 'Status', link: '/dashboard/orderan/status', permission: 'edit status orderan' },
           ],
         },
         {
