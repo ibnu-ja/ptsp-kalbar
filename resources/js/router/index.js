@@ -54,8 +54,8 @@ const router = new Router({
                 // },
                 {
                     path: 'daftar',
-                    name: 'Daftar Permohonan',
-                    component: () => import('@/pages/Web/layanan/Permohonan.vue'),
+                    name: 'Daftar orderan',
+                    component: () => import('@/pages/Web/layanan/orderan.vue'),
                     meta: {
                         auth: true,
                         layout: 'admin',
@@ -107,10 +107,10 @@ const router = new Router({
                     }
                 },
                 {
-                    path: 'permohonan',
-                    name: 'dashboard.permohonan',
-                    meta: { breadCrumb: 'Permohonan' },
-                    component: () => import('@/pages/Dashboard/permohonan/Index.vue'),
+                    path: 'orderan',
+                    name: 'dashboard.orderan',
+                    meta: { breadCrumb: 'orderan' },
+                    component: () => import('@/pages/Dashboard/orderan/Index.vue'),
                     children: [
                         {
                             path: '/',
@@ -118,8 +118,8 @@ const router = new Router({
                         },
                         {                           
                             path: 'list',
-                            name: 'dashboard.permohonan.list',
-                            component: () => import('@/pages/Dashboard/permohonan/List.vue'),
+                            name: 'dashboard.orderan.list',
+                            component: () => import('@/pages/Dashboard/orderan/List.vue'),
                             meta: {
                                 layout: 'admin',
                                 auth: true,
@@ -128,8 +128,8 @@ const router = new Router({
                         },
                         {                           
                             path: 'tambah',
-                            name: 'dashboard.permohonan.tambah',
-                            component: () => import('@/pages/Dashboard/permohonan/FormAdd.vue'),
+                            name: 'dashboard.orderan.tambah',
+                            component: () => import('@/pages/Dashboard/orderan/FormAdd.vue'),
                             meta: {
                                 layout: 'admin',
                                 auth: true,
