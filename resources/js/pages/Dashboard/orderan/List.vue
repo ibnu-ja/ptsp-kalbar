@@ -545,7 +545,7 @@ export default {
     },
     deleteData (id) {
       var self = this;
-      axios.delete('/api/v1/layanan/' + id)
+      axios.delete('/api/v1/orderan/' + id + '/hapus')
         .then(function (response) {
           self.tampilData()
           self.dialogDelete = false
