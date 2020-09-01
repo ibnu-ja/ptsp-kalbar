@@ -197,15 +197,22 @@
                         max-width="290"
                       >
                         <template v-slot:activator="{ on, attrs }">
-                          <v-text-field
-                            :value="tanggalFormat[i]"
-                            clearable
-                            label="Tanggal dokumen"
-                            readonly
-                            v-bind="attrs"
-                            v-on="on"
-                            @click:clear="items.tgl_berkas[i] = null"
-                          ></v-text-field>
+                          <ValidationProvider
+                            v-slot="{ errors }"
+                            name="Tanggal dokumen"
+                            rules="required"
+                          >
+                            <v-text-field
+                              v-model="tanggalFormat[i]"
+                              :error-messages="errors"
+                              clearable
+                              label="Tanggal dokumen"
+                              readonly
+                              v-bind="attrs"
+                              v-on="on"
+                              @click:clear="items.tgl_berkas[i] = null"
+                            ></v-text-field>
+                          </ValidationProvider>
                         </template>
                         <v-date-picker
                           v-model="items.tgl_berkas[i]"
@@ -316,10 +323,15 @@ export default {
   },
   computed: {
     tanggalFormat () {
+      var self = this
       let tanggal = []
-      this.items.tgl_berkas.forEach(element => {
-        tanggal.push(moment(element).format('dddd, MMMM Do YYYY'))
-      })
+      for (var i in self.items.tgl_berkas) {
+        var tes = moment(self.items.tgl_berkas[i])
+        tes.isValid() ? tanggal[i] = tes.format('dddd, Do MMMM YYYY') : null
+      }
+      // this.items.tgl_berkas.forEach(element => {
+      //   .isValid() ? 
+      // })
       return tanggal
     },
   },
@@ -340,6 +352,7 @@ export default {
       // this.items.tgl_berkas.push(new Date().toISOString().substr(0, 10)) //tanggal sekarang
       // this.items.tgl_format.push(this.formatDate(new Date().toISOString().substr(0, 10))) //tanggal sekarang
       this.items.tgl_berkas.push(new Date().toISOString().substr(0, 10))
+      // this.tanggalFormat.push(moment(new Date().toISOString().substr(0, 10)).format('dddd, Do MMMM YYYY'))
       // this.items.tgl_berkas.push("")
       this.items.nomor_berkas.push("")
     },
