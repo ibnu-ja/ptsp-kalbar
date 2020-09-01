@@ -176,7 +176,6 @@ Object.keys(rules).forEach(rule => {
   });
 });
 
-import fileDownload from 'js-file-download'
 export default {
   data () {
     return {

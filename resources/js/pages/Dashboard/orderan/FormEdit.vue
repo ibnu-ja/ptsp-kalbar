@@ -323,7 +323,6 @@ import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
 import * as rules from "vee-validate/dist/rules";
 import { messages } from "vee-validate/dist/locale/id.json";
 
-import fileDownload from 'js-file-download';
 var FormData = require('form-data');
 
 Object.keys(rules).forEach(rule => {
