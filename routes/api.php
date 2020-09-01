@@ -46,9 +46,10 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
 
         Route::post('layanan/{layanan}/orderan', 'OrderanController@store')->middleware(['permission:add orderan']);
         Route::patch('layanan/{layanan}/orderan/{orderan}', 'OrderanController@update')->middleware(['permission:add orderan']);
+        Route::delete('orderan/{orderan}/hapus', 'OrderanController@destroy')->middleware(['permission:delete orderan']);
         Route::get('orderan/{orderan}/verifikasi', 'OrderanController@verifikasi')->middleware(['permission:edit status orderan']);
         Route::delete('orderan/{orderan}/delete-media/{index}', 'OrderanController@deleteMedia')->middleware(['permission:delete orderan']);
-        Route::post('orderan/{orderan}/berkas', 'OrderanController@tambahBerkas')->middleware(['permission:delete orderan']);
+        Route::post('orderan/{orderan}/berkas', 'OrderanController@tambahBerkas')->middleware(['permission:edit orderan']);
         Route::get('orderan/{orderan}/selesai', 'OrderanController@selesai')->middleware(['permission:edit status orderan']);
         Route::post('orderan/{orderan}/disposisi', 'OrderanController@disposisi')->middleware(['permission:disposisi']);
 
