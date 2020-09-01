@@ -55,6 +55,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
         Route::post('orderan/{orderan}/disposisi', 'OrderanController@disposisi')->middleware(['permission:disposisi']);
         Route::get('jabatan', 'TampilJabatanController@index')->middleware(['role:pejabat|pimpinan|admin']);
         Route::get('jabatan-all', 'TampilJabatanController@indexTwo')->middleware(['role:pegawai|admin']);
+        
 
         Route::group(['middleware' => ['permission:view layanan']], function () {
             Route::get('layanan', 'LayananController@index');
@@ -67,8 +68,11 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
         Route::delete('layanan/{layanan}', 'LayananController@destroy')->middleware(['permission:delete layanan']);
 
         // https://laravel.com/docs/7.x/controllers
-        // Route::apiResource('surat-keluar', 'SuratKeluarController');        
+        // Route::apiResource('surat-keluar', 'SuratKeluarController');      
         Route::get('surat-keluar', 'SuratKeluarController@index')->middleware(['permission:view surat keluar']);
+        
+        Route::get('surat-keluar/cekNomor/{jenis}', 'SuratKeluarController@cekNomor')->middleware(['role:pegawai|admin']); 
+
         Route::get('surat-keluar/{suratKeluar}', 'SuratKeluarController@show')->middleware(['permission:view surat keluar']);
         Route::post('surat-keluar', 'SuratKeluarController@store')->middleware(['permission:add surat keluar']);
         Route::patch('surat-keluar/{suratKeluar}', 'SuratKeluarController@update')->middleware(['permission:edit surat keluar']);
