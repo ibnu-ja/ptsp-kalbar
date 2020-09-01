@@ -4,7 +4,7 @@
       v-model="drawer"
       app
     >
-      <v-list dense>
+      <v-list>
         <template
           v-for="item in items"
           v-if="$auth.check({permissions: item.permission})"
@@ -114,7 +114,7 @@ export default {
           text: 'Orderan',
           model: null,
           url: '/dashboard/orderan',
-          permission: 'orderan',
+          permission: ['view orderan', 'add orderan', 'edit orderan', 'delete orderan'],
           children: [
             { icon: 'mdi-format-list-bulleted', text: 'List', link: '/dashboard/orderan/list', permission: 'view orderan' },
             { icon: 'mdi-plus', text: 'Tambah', link: '/dashboard/orderan/tambah', permission: 'add orderan' },
@@ -127,10 +127,23 @@ export default {
           text: 'Layanan',
           url: '/dashboard/layanan',
           model: null,
-          permission: 'layanan',
+          permission: ['view layanan', 'add layanan', 'edit layanan', 'delete layanan'],
           children: [
             { icon: 'mdi-format-list-bulleted', text: 'List', link: '/dashboard/layanan/list', permission: 'view layanan' },
             { icon: 'mdi-plus', text: 'Tambah', link: '/dashboard/layanan/tambah', permission: 'add layanan' },
+          ],
+        },
+        {
+          icon: 'mdi-chevron-down',
+          icon_alt: 'mdi-chevron-down',
+          icon_prepend: 'mdi-email-send',
+          text: 'Surat Keluar',
+          url: '/dashboard/surat-keluar',
+          model: null,
+          permission: ['view surat keluar', 'add surat keluar', 'edit surat keluar', 'delete surat keluar'],
+          children: [
+            { icon: 'mdi-format-list-bulleted', text: 'List', link: '/dashboard/surat-keluar/list', permission: 'view surat keluar' },
+            { icon: 'mdi-plus', text: 'Tambah', link: '/dashboard/surat-keluar/tambah', permission: 'add surat keluar' },
           ],
         },
       ],
