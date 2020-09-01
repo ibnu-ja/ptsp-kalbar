@@ -15,10 +15,13 @@ class SuratKeluarSeeder extends Seeder
     {
         DB::table('surat_keluars')->insert([
             'user_id' => '3', //pak Rohadi
-            'nomor_urut' => '1000',
+            'nomor_urut_biasa' => '1000',
+            'nomor_urut_sk' => '0',
+            'nomor_urut_spd' => '0',
             'nomor_surat' => '1000/Kw.14.1/Bambang/08/2020',
-            'jenis' => 'Surat Keluar Biasa',
-            'tgl_surat' => '2020-08-31',
+            'isi' => 'Bambang',
+            'tgl_surat' => '2020-08-01',
+            'jenis' => '0',
             'kode_satker' => 'Kw.14.1',
             'asal' => 'Kepala Bagian Tata Usaha',
             'created_at' => Carbon::now(),
