@@ -222,16 +222,23 @@
                         max-width="290"
                       >
                         <template v-slot:activator="{ on, attrs }">
-                          <v-text-field
-                            :value="tanggalFormat[i]"
-                            clearable
-                            label="Tanggal dokumen"
-                            readonly
-                            v-bind="attrs"
-                            :disabled="items.org[i] !== null"
-                            v-on="on"
-                            @click:clear="items.tgl_berkas[i] = null"
-                          ></v-text-field>
+                          <ValidationProvider
+                            v-slot="{ errors }"
+                            name="Tanggal dokumen"
+                            rules=""
+                          >
+                            <v-text-field
+                              v-model="tanggalFormat[i]"
+                              :error-messages="errors"
+                              clearable
+                              :disabled="items.org[i] !== null"
+                              label="Tanggal dokumen"
+                              readonly
+                              v-bind="attrs"
+                              v-on="on"
+                              @click:clear="items.tgl_berkas[i] = null"
+                            ></v-text-field>
+                          </ValidationProvider>
                         </template>
                         <v-date-picker
                           v-model="items.tgl_berkas[i]"
@@ -239,7 +246,7 @@
                         ></v-date-picker>
                       </v-menu>
                       <template v-if="items.org[i] !== null">
-                        <v-btn>
+                        <v-btn @click="unduh(items)">
                           <v-icon>mdi-cloud-download</v-icon> Unduh
                         </v-btn> {{items.org[i]}}
                       </template>
@@ -315,6 +322,8 @@ import moment from 'moment'
 import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
 import * as rules from "vee-validate/dist/rules";
 import { messages } from "vee-validate/dist/locale/id.json";
+
+import fileDownload from 'js-file-download';
 var FormData = require('form-data');
 
 Object.keys(rules).forEach(rule => {
@@ -394,6 +403,9 @@ export default {
     this.getData(this.$route.params.id)
   },
   methods: {
+    unduh (berkas) {
+      fileDownload('/api/v1/unduh-berkas/' + berkas.id, berkas.file_name)
+    },
     konfirmasi (item, index) {
       var self = this;
       self.dialogDelete = true
@@ -434,6 +446,7 @@ export default {
             self.items.perihal[index] = response.data.data.berkas[index].custom_properties.surat.perihal
             self.items.tgl_berkas[index] = response.data.data.berkas[index].custom_properties.surat.tgl_berkas
             self.items.org[index] = response.data.data.berkas[index].file_name
+            // self.items.org[index] = response.data.data.berkas[index].file_name
             // self.items.tgl_format[index] = self.formatDate(self.items.tgl_berkas[index])
             // console.log(response.data.data.berkas[index].custom_properties.surat.tgl_berkas)
             // console.log(self.formatDate(response.data.data.berkas[index].custom_properties.surat.tgl_berkas))
