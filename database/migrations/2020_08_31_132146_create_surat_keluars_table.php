@@ -16,12 +16,15 @@ class CreateSuratKeluarsTable extends Migration
         Schema::create('surat_keluars', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->bigInteger('nomor_urut');
+            $table->bigInteger('nomor_urut_biasa')->nullable();
+            $table->bigInteger('nomor_urut_sk')->nullable();
+            $table->bigInteger('nomor_urut_spd')->nullable();
             $table->string('nomor_surat');
-            $table->string('jenis');
-            $table->string('tgl_surat');            
-            $table->string('asal');            
-            $table->string('kode_satker');            
+            $table->tinyInteger('jenis');
+            $table->string('isi');
+            $table->date('tgl_surat');
+            $table->string('asal');
+            $table->string('kode_satker');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->timestamps();
         });
