@@ -183,4 +183,10 @@ class OrderanController extends ApiController
         $media[$index]->delete();
         return response()->json(null, 204);
     }
+    public function unduhMedia(Orderan $orderan, $index)
+    {
+        $mediaItem = $orderan->getMedia('berkas');
+        // return $mediaItem[$index]->getPath();
+        return response()->download($mediaItem[$index]->getPath(), $mediaItem[$index]->file_name);
+    }
 }
