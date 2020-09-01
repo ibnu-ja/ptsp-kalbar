@@ -179,7 +179,7 @@ class OrderanController extends ApiController
     }
     public function deleteMedia(Orderan $orderan, $index)
     {
-        $media = $orderan->getMedia();
+        $media = $orderan->getMedia('berkas');
         $media[$index]->delete();
         return response()->json(null, 204);
     }
