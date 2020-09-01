@@ -21,8 +21,8 @@ class CreateOrderansTable extends Migration
             $table->string('disposisi')->nullable();
             $table->string('pemohon')->nullable();
             $table->unsignedBigInteger('layanan_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
-            $table->foreign('layanan_id')->references('id')->on('layanans')->onDelete('cascade');;
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('layanan_id')->references('id')->on('layanans')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ class CreateOrderansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permohonans');
+        Schema::dropIfExists('orderans');
     }
 }
