@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 
+import id from 'vuetify/es5/locale/id'
+
 Vue.use(Vuetify)
 
 export default new Vuetify({
@@ -14,5 +16,9 @@ export default new Vuetify({
             },
             dark: {},
         },
+    },
+    lang: {
+        locales: { id },
+        current: 'id',
     },
 })

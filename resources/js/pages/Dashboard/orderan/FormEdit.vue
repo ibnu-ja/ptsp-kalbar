@@ -234,7 +234,6 @@
                           ></v-text-field>
                         </template>
                         <v-date-picker
-                          locale="id-id"
                           v-model="items.tgl_berkas[i]"
                           @change="menu[i] = false"
                         ></v-date-picker>
