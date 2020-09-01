@@ -176,4 +176,10 @@ class SuratKeluarController extends ApiController
             else return response()->json(['data' => $nomor_urut_sk + 1]);
         }
     }
+    public function unduh(SuratKeluar $suratKeluar)
+    {
+        $mediaItem = $suratKeluar->getMedia('berkas');
+        // return $mediaItem[$index]->getPath();
+        return response()->download($mediaItem[0]->getPath(), $mediaItem[0]->file_name);
+    }
 }
