@@ -190,6 +190,48 @@ const router = new Router({
                         },
                     ]
                 },
+                {
+                    path: 'surat-keluar',
+                    name: 'dashboard.surat-keluar',
+                    meta: { breadCrumb: 'Surat Keluar' },
+                    component: () => import('@/pages/Dashboard/surat-keluar/Index.vue'),
+                    children: [
+                        {
+                            path: '/',
+                            redirect: 'list'
+                        },
+                        {                           
+                            path: 'list',
+                            name: 'dashboard.surat-keluar.list',
+                            component: () => import('@/pages/Dashboard/surat-keluar/List.vue'),
+                            meta: {
+                                layout: 'admin',
+                                auth: true,
+                                breadCrumb: 'List'
+                            }
+                        },
+                        {
+                            path: 'tambah',
+                            name: 'dashboard.surat-keluar.tambah',
+                            component: () => import('@/pages/Dashboard/surat-keluar/FormAdd.vue'),
+                            meta: {
+                                layout: 'admin',
+                                auth: true,
+                                breadCrumb: 'Tambah'
+                            }
+                        },
+                        {
+                            path: ':id/edit',
+                            name: 'dashboard.surat-keluar.edit',
+                            component: () => import('@/pages/Dashboard/surat-keluar/FormEdit.vue'),
+                            meta: {
+                                layout: 'admin',
+                                auth: true,
+                                breadCrumb: 'Edit'
+                            }
+                        },
+                    ]
+                },
             ]
         },
         {
