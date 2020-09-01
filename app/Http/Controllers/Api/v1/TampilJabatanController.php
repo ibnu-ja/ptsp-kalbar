@@ -27,11 +27,12 @@ class TampilJabatanController extends ApiController
                 ->where("kode_jabatan", "like", Auth::user()->kode_jabatan . ".%")
                 ->select('jabatan', 'kode_jabatan')->get();
         }
-        // return 'salah';
-        // $jabatan = User::whereHas("roles", function ($q) {
-        //     $q->where("name", "pejabat");
-        // })->select('jabatan', 'kode_jabatan')->get();
-        // $jabatan = User::whereNotNull('jabatan')->select('jabatan', 'kode_jabatan')->get();
+        return response()->json(['data' => $jabatan]);
+    }
+    public function indexTwo()
+    {
+        //god please dont kill me
+        $jabatan = User::role('pegawai')->groupBy('jabatan', 'kode_jabatan')->select('jabatan', 'kode_jabatan')->orderBy('kode_jabatan')->get();
         return response()->json(['data' => $jabatan]);
     }
 }
