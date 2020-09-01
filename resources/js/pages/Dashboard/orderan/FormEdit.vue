@@ -246,7 +246,7 @@
                         ></v-date-picker>
                       </v-menu>
                       <template v-if="items.org[i] !== null">
-                        <v-btn @click="unduh(items)">
+                        <v-btn @click="unduh(items.org[i], i)">
                           <v-icon>mdi-cloud-download</v-icon> Unduh
                         </v-btn> {{items.org[i]}}
                       </template>
@@ -402,8 +402,21 @@ export default {
     this.getData(this.$route.params.id)
   },
   methods: {
-    unduh (berkas) {
-      fileDownload('/api/v1/unduh-berkas/' + berkas.id, berkas.file_name)
+    unduh (filename, index) {
+      axios({
+        url: '/api/v1/orderan/' + this.$route.params.id + '/unduh-berkas/' + index,
+        method: 'GET',
+        responseType: 'blob',
+      }).then((response) => {
+        var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+        var fileLink = document.createElement('a');
+
+        fileLink.href = fileURL;
+        fileLink.setAttribute('download', filename);
+        document.body.appendChild(fileLink);
+
+        fileLink.click();
+      });
     },
     konfirmasi (item, index) {
       var self = this;
