@@ -107,7 +107,7 @@ class OrderanController extends ApiController
                                 'tgl_berkas' => $request->tgl_berkas[$key],
                             ]
                         ])
-                        ->toMediaCollection();
+                        ->toMediaCollection('berkas');
                 });
         }
         $orderan->setStatus('pending');
@@ -148,7 +148,7 @@ class OrderanController extends ApiController
                                 'tgl_berkas' => $request->tgl_berkas[$key],
                             ]
                         ])
-                        ->toMediaCollection();
+                        ->toMediaCollection('berkas');
                 });
         }
         return new OrderanResource($orderan);
