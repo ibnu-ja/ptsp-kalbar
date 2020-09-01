@@ -14,7 +14,7 @@ class OrderanResource extends JsonResource
      */
     public function toArray($request)
     {
-        $berkas = $this->getMedia()->makeHidden(['created_at','updated_at', 'model_type', 'model_id', 'id']);
+        $berkas = $this->getMedia('berkas')->makeHidden(['created_at','updated_at', 'model_type', 'model_id', 'id']);
         return [
             'id' => $this->id,
             'layanan' => $this->layanan->makeHidden(['created_at','updated_at']),
