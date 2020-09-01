@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersTableSeeder::class);
-        $this->call(SuratMasukSeeder::class);
+        $this->call(SuratKeluarSeeder::class);
+        $this->call(LayananSeeder::class);
         // $this->call(LayananTataKelolaSeeder::class);
         // $this->call(LayananAgamaSeeder::class);
         // $this->call(LayananPendidikanSeeder::class);
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'layanan']);
         //ide yang buruk menghilangkan permission disposisi
         Permission::create(['name' => 'disposisi']);
+        Permission::create(['name' => 'surat keluar']);
 
         //orderan
         Permission::create(['name' => 'view orderan']);
@@ -45,7 +47,12 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'view layanan']);
         Permission::create(['name' => 'add layanan']);
         Permission::create(['name' => 'edit layanan']);
-        Permission::create(['name' => 'delete layanan']);
+        Permission::create(['name' => 'delete layanan']);        
+        //surat keluar
+        Permission::create(['name' => 'view surat keluar']);
+        Permission::create(['name' => 'add surat keluar']);
+        Permission::create(['name' => 'edit surat keluar']);
+        Permission::create(['name' => 'delete surat keluar']);
 
         // tambahkan permission ke role admin
         $role = Role::find(1);
@@ -62,12 +69,19 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('edit layanan');
         $role->givePermissionTo('delete layanan');
 
+        $role->givePermissionTo('view surat keluar');
+        $role->givePermissionTo('add surat keluar');
+        $role->givePermissionTo('edit surat keluar');
+        $role->givePermissionTo('delete surat keluar');
+
         $role->givePermissionTo('edit status orderan');
 
         // tambah permission ke role pimpinan
         $role = Role::find(2);
         $role->givePermissionTo('orderan');   
         $role->givePermissionTo('view orderan');
+        $role->givePermissionTo('view surat keluar');
+        $role->givePermissionTo('add surat keluar');
         // $role->givePermissionTo('add orderan');
         // $role->givePermissionTo('edit orderan');
         // $role->givePermissionTo('delete orderan');
@@ -78,6 +92,8 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('orderan');     
         $role->givePermissionTo('view orderan');
         $role->givePermissionTo('add orderan');
+        $role->givePermissionTo('view surat keluar');
+        $role->givePermissionTo('add surat keluar');
         // $role->givePermissionTo('edit orderan');
         // $role->givePermissionTo('delete orderan');
         $role->givePermissionTo('disposisi');
@@ -88,6 +104,8 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo('orderan');  
         $role->givePermissionTo('view orderan');
         $role->givePermissionTo('add orderan');
+        $role->givePermissionTo('view surat keluar');
+        $role->givePermissionTo('add surat keluar');
         // $role->givePermissionTo('edit orderan');
         // $role->givePermissionTo('delete orderan');
         $role->givePermissionTo('edit status orderan');
@@ -96,6 +114,7 @@ class DatabaseSeeder extends Seeder
         $role = Role::find(5);        
         $role->givePermissionTo('orderan');   
         $role->givePermissionTo('view orderan');
+        $role->givePermissionTo('view surat keluar');
         $role->givePermissionTo('add orderan');
         // $role->givePermissionTo('edit orderan');
         // $role->givePermissionTo('delete orderan');
