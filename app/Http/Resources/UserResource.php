@@ -16,6 +16,9 @@ class UserResource extends JsonResource
     {
         foreach ($this->getAllPermissions() as $item) {
             $permissions[] = $item->name;
+        } //god plz really?
+        if (empty($permissions)) {
+            $permissions = [];
         }
         return [
             "id"=> $this->id,
