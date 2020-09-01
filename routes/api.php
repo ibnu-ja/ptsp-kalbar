@@ -16,6 +16,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
     Route::prefix('auth')->group(function () {
         Route::post('register', 'AuthController@register');
@@ -39,9 +40,6 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
         });
 
         Route::group(['middleware' => ['permission:view orderan']], function () {
-            Route::get('unduh-berkas/{mediaItem}', function(Media $mediaItem){
-                return response()->download($mediaItem->getPath(), $mediaItem->file_name);
-            });
             Route::get('layanan/orderan', 'OrderanController@index');
             Route::get('layanan/orderan/{orderan}', 'OrderanController@show');
         });
@@ -53,15 +51,17 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
         Route::post('orderan/{orderan}/berkas', 'OrderanController@tambahBerkas')->middleware(['permission:delete orderan']);
         Route::get('orderan/{orderan}/selesai', 'OrderanController@selesai')->middleware(['permission:edit status orderan']);
         Route::post('orderan/{orderan}/disposisi', 'OrderanController@disposisi')->middleware(['permission:disposisi']);
+
+        Route::get('orderan/{orderan}/unduh-berkas/{index}', 'OrderanController@unduhMedia')->middleware(['permission:view orderan']);
+
         Route::get('jabatan', 'TampilJabatanController@index')->middleware(['role:pejabat|pimpinan|admin']);
         Route::get('jabatan-all', 'TampilJabatanController@indexTwo')->middleware(['role:pegawai|admin']);
-        
 
         Route::group(['middleware' => ['permission:view layanan']], function () {
             Route::get('layanan', 'LayananController@index');
             Route::post('layanan', 'LayananController@store');
         });
-        
+
         Route::get('layanan/{layanan}', 'LayananController@show')->middleware(['permission:view layanan']);
         Route::put('layanan/{layanan}', 'LayananController@update')->middleware(['permission:edit layanan']);
         Route::patch('layanan/{layanan}', 'LayananController@update')->middleware(['permission:edit layanan']);
@@ -70,8 +70,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
         // https://laravel.com/docs/7.x/controllers
         // Route::apiResource('surat-keluar', 'SuratKeluarController');      
         Route::get('surat-keluar', 'SuratKeluarController@index')->middleware(['permission:view surat keluar']);
-        
-        Route::get('surat-keluar/cekNomor/{jenis}', 'SuratKeluarController@cekNomor')->middleware(['role:pegawai|admin']); 
+
+        Route::get('surat-keluar/cekNomor/{jenis}', 'SuratKeluarController@cekNomor')->middleware(['role:pegawai|admin']);
 
         Route::get('surat-keluar/{suratKeluar}', 'SuratKeluarController@show')->middleware(['permission:view surat keluar']);
         Route::post('surat-keluar', 'SuratKeluarController@store')->middleware(['permission:add surat keluar']);
@@ -79,6 +79,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
         Route::put('surat-keluar/{suratKeluar}', 'SuratKeluarController@update')->middleware(['permission:edit surat keluar']);
         Route::delete('surat-keluar/{suratKeluar}', 'SuratKeluarController@destroy')->middleware(['permission:delete surat keluar']);
 
+        Route::get('surat-keluar/{suratKeluar}/unduh', 'SuratKeluarController@unduh')->middleware(['permission:view surat keluar']);
         Route::post('surat-keluar/{suratKeluar}/berkas', 'SuratKeluarController@tambahBerkas')->middleware(['permission:edit surat keluar']);
         Route::delete('surat-keluar/{suratKeluar}/berkas', 'SuratKeluarController@hapusBerkas')->middleware(['permission:delete surat keluar']);
     });
