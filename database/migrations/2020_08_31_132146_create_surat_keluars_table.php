@@ -24,6 +24,7 @@ class CreateSuratKeluarsTable extends Migration
             $table->string('isi');
             $table->date('tgl_surat');
             $table->string('asal');
+            $table->string('tujuan');
             $table->string('kode_satker');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->timestamps();

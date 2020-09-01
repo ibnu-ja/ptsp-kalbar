@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Resources\SuratKeluarResource;
 use Illuminate\Http\Request;
 use App\SuratKeluar;
+use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,7 +36,7 @@ class SuratKeluarController extends ApiController
     {
         $validation = validator($request->all(), [
             'nomor_surat' => 'required',
-            'jenis' => 'required',
+            'jenis' => 'required|integer|between:0,2',
             'tgl_surat' => 'required',
             'isi' => 'required',
             'berkas' => 'required',
@@ -44,28 +46,28 @@ class SuratKeluarController extends ApiController
             return response()->json($validation->errors(), 400);
         }
 
-        if (date('z') === '0') {
-            $nomor_urut_biasa = 0;
-            $nomor_urut_sk = 0;
-            $nomor_urut_spd = 0;
+        $count = DB::table('surat_keluars')->select('id')
+            ->whereYear('created_at', date("Y"))
+            ->where('jenis', '=', $request->jenis)
+            ->get();
+        // return $count;
+        if ($count->isEmpty()) {
+            $nomor_urut_biasa = 1;
+            $nomor_urut_spd = 1;
+            $nomor_urut_sk = 1;
         } else {
             //WHAT IN TARNATION!!!
-            $surat = SuratKeluar::orderBy('id', 'desc')->first();
-            if (!$surat) {
-                $nomor_urut_biasa = 0;
-                $nomor_urut_sk = 0;
-                $nomor_urut_spd = 0;
-            } else {
-                $nomor_urut_biasa = $surat->nomor_urut_biasa;
-                $nomor_urut_spd = $surat->nomor_urut_spd;
-                $nomor_urut_sk = $surat->nomor_urut_sk;
-            }
+            $surat = SuratKeluar::orderBy('id', 'desc')
+                ->where('jenis', '=', $request->jenis)
+                ->first();
+            $nomor_urut_biasa = $surat->nomor_urut_biasa;
+            $nomor_urut_spd = $surat->nomor_urut_spd;
+            $nomor_urut_sk = $surat->nomor_urut_sk;
+            
             if ($request->jenis == 0) $nomor_urut_biasa++;
             else if ($request->jenis == 1) $nomor_urut_spd++;
             else if ($request->jenis == 2) $nomor_urut_sk++;
-            else (abort(404));
         }
-        // return [$nomor_urut_biasa, $nomor_urut_spd, $nomor_urut_sk];
 
         $suratKeluar = SuratKeluar::create([
             'user_id' => Auth::user()->id,
@@ -75,6 +77,7 @@ class SuratKeluarController extends ApiController
             'nomor_surat' => $request->nomor_surat,
             'tgl_surat' => $request->tgl_surat,
             'jenis' => $request->jenis,
+            'tujuan' => $request->tujuan,
             'isi' => $request->isi,
             'kode_satker' => Auth::user()->kode_jabatan,
             'asal' => Auth::user()->jabatan,
@@ -147,5 +150,30 @@ class SuratKeluarController extends ApiController
     {
         $suratKeluar->clearMediaCollection('berkas');
         return response()->json(null, 204);
+    }
+
+    public function cekNomor($jenis)
+    {
+        if ($jenis > 2) (abort(404));
+        $count = DB::table('surat_keluars')->select('id')
+            ->whereYear('created_at', date("Y"))
+            ->where('jenis', '=', $jenis)
+            ->get();
+        // return $count;
+        if ($count->isEmpty()) {
+            return response()->json(['data' => 1]);
+        } else {
+            //WHAT IN TARNATION!!!
+            $surat = SuratKeluar::orderBy('id', 'desc')
+                ->where('jenis', '=', $jenis)
+                ->first();
+            $nomor_urut_biasa = $surat->nomor_urut_biasa;
+            $nomor_urut_spd = $surat->nomor_urut_spd;
+            $nomor_urut_sk = $surat->nomor_urut_sk;
+            
+            if ($jenis == 0) return response()->json(['data' =>$nomor_urut_biasa + 1]);
+            else if ($jenis == 1) return response()->json(['data' => $nomor_urut_spd + 1]);
+            else return response()->json(['data' => $nomor_urut_sk + 1]);
+        }
     }
 }
