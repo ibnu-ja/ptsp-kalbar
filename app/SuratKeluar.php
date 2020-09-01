@@ -17,6 +17,7 @@ class SuratKeluar extends Model implements HasMedia
         'kode_satker',
         'tgl_surat',
         'asal',
+        'tujuan',
         'nomor_urut_biasa',
         'nomor_urut_spd',
         'nomor_urut_sk',
