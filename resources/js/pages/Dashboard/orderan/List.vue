@@ -160,7 +160,7 @@
                   rounded
                   small
                   color="primary"
-                  @click="tampilBerkas(item.berkas)"
+                  @click="tampilBerkas(item)"
                 >tampil</v-btn>
               </td>
               <td>{{item.created_at | moment("DD-MM-YYYY")}}</td>
@@ -186,15 +186,15 @@
           ><template v-slot:body="{ items }">
               <tbody>
                 <tr
-                  v-for="item in berkas"
-                  :key="item.id"
+                  v-for="(item, index) in berkas"
+                  :key="item.uuid"
                 >
                   <td>
                     <v-btn
                       icon
                       small
                       color="primary"
-                      @click="unduh(item)"
+                      @click="unduh(item, index)"
                     >
                       <v-icon>mdi-cloud-download</v-icon>
                     </v-btn>
@@ -321,7 +321,6 @@ Object.keys(rules).forEach(rule => {
   });
 });
 
-import fileDownload from 'js-file-download'
 export default {
   data () {
     return {
@@ -476,8 +475,21 @@ export default {
 
       return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     },
-    unduh (berkas) {
-      fileDownload('/api/v1/unduh-berkas/' + berkas.id, berkas.file_name)
+    unduh (berkas, index) {
+      axios({
+        url: '/api/v1/orderan/' + this.selectedItem.id + '/unduh-berkas/' + index,
+        method: 'GET',
+        responseType: 'blob',
+      }).then((response) => {
+        var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+        var fileLink = document.createElement('a');
+
+        fileLink.href = fileURL;
+        fileLink.setAttribute('download', berkas.file_name);
+        document.body.appendChild(fileLink);
+
+        fileLink.click();
+      });
     },
     tampilData () {
       var self = this;
@@ -492,11 +504,12 @@ export default {
           console.log(e)
         })
     },
-    tampilBerkas (berkas) {
+    tampilBerkas (item) {
       var self = this
       self.dialogBerkas = true
       // console.log(berkas)
-      self.berkas = [...berkas]
+      self.selectedItem = item
+      self.berkas = [...item.berkas]
       console.log(self.berkas)
 
     },

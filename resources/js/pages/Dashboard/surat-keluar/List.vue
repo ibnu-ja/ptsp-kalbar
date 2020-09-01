@@ -123,7 +123,7 @@
                   small
                   rounded
                   color="primary"
-                  @click="unduh(item.berkas[0])"
+                  @click="unduh(item)"
                 >
                   <v-icon>mdi-cloud-download</v-icon>
                   {{formatBytes(item.berkas[0].size)}}
@@ -279,8 +279,21 @@ export default {
 
       return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     },
-    unduh (berkas) {
-      fileDownload('/api/v1/unduh-berkas/' + berkas.id, berkas.file_name)
+    unduh (item) {
+      axios({
+        url: '/api/v1/surat-keluar/' + item.id + '/unduh',
+        method: 'GET',
+        responseType: 'blob',
+      }).then((response) => {
+        var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+        var fileLink = document.createElement('a');
+
+        fileLink.href = fileURL;
+        fileLink.setAttribute('download', item.berkas[0].file_name);
+        document.body.appendChild(fileLink);
+
+        fileLink.click();
+      });
     },
     tampilData () {
       var self = this;
